@@ -18,12 +18,12 @@ function App(props) {
         <Header state={props.state.header_navbar.header} />
         <Navbar state={props.state.header_navbar} />
         <Routes>
-          <Route path="/profile/*" element={<ProfileContainer />} />
+          <Route path="/profile/:userId?" element={<ProfileContainer />} />
           <Route path="/news" element={<News />} />
           <Route path="/messages/*" element={<MessagesContainer />} />
-          <Route path='music/' element={<Music />} />
-          <Route path='friends/' element={<FriendsContainer />} />
-          <Route path='settings/' element={<Settings />} />
+          <Route path='/music/' element={<Music />} />
+          <Route path='/friends/' element={<FriendsContainer />} />
+          <Route path='/settings/' element={<Settings />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -16,24 +16,24 @@ function Friends(props) {
     return (
         <div className={s.Users} >
             <div>
-                {props.users.map(u =>
+                {props.users.map(user =>
                     <div className={s.UserItems}>
                         <div className={s.UserAvatar}>
-                            <NavLink to={`../Profile/` + u.id}>
-                                <img src={u.photos.small != null ? u.photos.small : Avatar} alt='UserAvatar' />
+                            <NavLink to={`../Profile/` + user.id}>
+                                <img src={user.photos.small != null ? user.photos.small : Avatar} alt='UserAvatar' />
                             </NavLink>
                             <div>
-                                {u.followed
-                                    ? <button onClick={() => { props.unfollow(u.id) }} className={s.followed}>Follow</button>
-                                    : <button onClick={() => { props.follow(u.id) }} className={s.followed}>Unfollow</button>}
+                                {user.followed
+                                    ? <button onClick={() => { props.unfollow(user.id) }} className={s.followed}>Follow</button>
+                                    : <button onClick={() => { props.follow(user.id) }} className={s.followed}>Unfollow</button>}
                             </div>
                         </div>
                         <div className={s.UserInformationItem}>
                             <div className={s.Name}>
-                                {u.name}
+                                {user.name}
                             </div>
                             <div className={s.status}>
-                                {u.status}
+                                {user.status}
                             </div>
                             <div className={s.writeMessage}>
                                 <img src={writeMessage} alt='writeMessage' className={s.writeMessageImg} />
