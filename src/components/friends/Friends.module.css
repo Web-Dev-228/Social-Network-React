@@ -1,0 +1,107 @@
+.UserItems {
+    display: flex;
+    padding: 10px;
+}
+
+.UserAvatar img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    margin-left: 14px;
+    margin-top: 2px;
+}
+
+.followed {
+    width: 89px;
+    position: relative;
+    font-size: 17.5px;
+    border-radius: 11px;
+    background-color: rgb(77, 77, 77);
+}
+
+.UserInformationItem {
+    width: 500px;
+    position: relative;
+    margin-left: 10px;
+    padding: 2px;
+    background-color: rgb(47, 46, 46);
+    border-radius: 11px;
+    border: 0.1px solid;
+    border-color: rgb(77, 77, 77);
+}
+
+.Name {
+    position: relative;
+    width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: 3px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    padding: 1px;
+}
+
+.status {
+    width: 280px;
+    font-size: 17px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: -3px;
+    margin-left: 3px;
+    color: rgb(175, 175, 175);
+    padding: 1px;
+}
+
+.writeMessage {
+    margin-left: 3px;
+    margin-top: 11px;
+}
+
+.writeMessageText {
+    position: absolute;
+    margin-top: -1px;
+    margin-left: 2px;
+    font-size: 17px;
+    padding: 1px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.writeMessageImg {
+    width: 20px;
+    float: left;
+    margin-top: 2px;
+}
+
+.location {
+    width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: right;
+    margin-top: -58px;
+    float: right;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+}
+
+.pagesNumber {
+    position: relative;
+    width: 600px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.active {
+    font-weight: bold;
+}
+
+.notActive {
+    cursor: pointer;
+}

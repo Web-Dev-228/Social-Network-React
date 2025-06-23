@@ -1,0 +1,18 @@
+.header {
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    grid-area: header;
+    border-radius: 0px 0px 11px 11px;
+    background-color: rgb(54, 53, 53);
+    border: 0.1px solid;
+    border-color: rgb(77, 77, 77);
+}
+
+.header img {
+    position: relative;
+    width: 45px;
+    height: auto;
+    top: 2px;
+    left: 8px;
+}

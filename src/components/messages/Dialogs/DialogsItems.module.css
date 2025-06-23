@@ -1,0 +1,40 @@
+.DialogsItems {
+  background-color: rgb(47, 46, 46);
+  border-radius: 11px;
+  border: 0.1px solid;
+  border-color: rgb(77, 77, 77);
+}
+
+.Dialog {
+  display: flex;
+  padding: 10px;
+}
+
+.Dialog img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  float: left;
+  margin-left: 8px;
+}
+
+.Name {
+  position: relative;
+  margin-left: 8px;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
+.Messages {
+  width: 500px;
+  font-size: 17px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 7px;
+  /* margin-top: 26px; */
+  color: rgb(175, 175, 175);
+  /* padding: 5px; */
+}

@@ -1,0 +1,44 @@
+.navbar {
+    grid-area: navbar;
+}
+
+.settingsItem {
+    margin-top: 10px;
+}
+
+.item img {
+    position: relative;
+    width: 20px;
+    top: 3px;
+}
+
+.navbar_string {
+    color: rgb(255, 255, 255);
+    /* margin-left: 2px; */
+    text-decoration: none;
+    font-size: 17px;
+    padding: 5px;
+}
+
+.navbar_string:hover {
+    padding: 5px;
+    background-color: rgb(31, 31, 31);
+}
+
+.item {
+    padding: 5px;
+}
+
+.item:hover {
+    padding: 5px;
+    background-color: rgb(31, 31, 31);
+}
+
+.active {
+    padding: 5px;
+    /* color: rgb(125, 125, 125); */
+    color: rgb(201, 201, 201);
+    margin-left: 2px;
+    text-decoration: none;
+    font-size: 17px;
+}
