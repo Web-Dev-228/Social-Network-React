@@ -18,11 +18,11 @@ class ProfileContainer extends Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = 2;
+            userId = this.props.userId;
         }
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then(response => {
-                this.props.setUserProfile(response.data)
+                this.props.setUserProfile(response.data)    
             })
             .catch(error => {
                 console.error("Ошибка загрузки данных:", error);
@@ -31,7 +31,6 @@ class ProfileContainer extends Component {
 
 
     render() {
-        console.log(this.props.userProfile)
         return (
             <Profile {...this.props} />
         )
@@ -43,7 +42,8 @@ function mapStateToProps(state) {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText,
         userInfo: state.profilePage.userInfo,
-        userProfile: state.profilePage.userProfile
+        userProfile: state.profilePage.userProfile,
+        userId: state.auth.data.id
     }
 }
 

@@ -1,8 +1,8 @@
-
+import css from './Music.module.css';
 
 function Music() {
     return (
-        <div>Music</div>
+        <div className={css.Music}>Music</div>
     )
 }
 

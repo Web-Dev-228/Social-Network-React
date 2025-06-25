@@ -1,5 +1,5 @@
 import './App.css';
-import Header from './components/header/Header';
+import HeaderContainer from './components/header/HeaderContainer';
 import Navbar from './components/navbar/Navbar';
 import ProfileContainer from './components/profile/ProfileContainer';
 import MessagesContainer from './components/messages/MessagesContainer';
@@ -15,8 +15,8 @@ function App(props) {
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
-        <Header state={props.state.header_navbar.header} />
-        <Navbar state={props.state.header_navbar} />
+        <HeaderContainer />
+        <Navbar state={props.state.navbar} />
         <Routes>
           <Route path="/profile/:userId?" element={<ProfileContainer />} />
           <Route path="/news" element={<News />} />

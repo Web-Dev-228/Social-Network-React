@@ -1,15 +1,15 @@
-import s from './Dialog.module.css';
+import css from './Dialog.module.css';
 
 
 function Dialog(props) {
   return (
-    <div className={s.Dialog}>
+    <div className={css.Dialog}>
       <img src={props.src} alt={props.src} />
       <div>
-        <div className={s.Name}>
+        <div className={css.Name}>
           {props.name}
         </div>
-        <div className={s.Messages}>
+        <div className={css.Messages}>
           {props.message}
         </div>
       </div>

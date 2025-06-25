@@ -1,5 +1,7 @@
-import s from './ProfileInfo.module.css';
+import css from './ProfileInfo.module.css';
 import Preloader from '../../../common/Preloader/Preloader'
+import userBaseAvatar from '../../../redux/images/profile/Avatar.png'
+import userBaseBackground from '../../../redux/images/profile/UserBackground.jpg'
 
 
 function ProfileInfo(props) {
@@ -10,14 +12,14 @@ function ProfileInfo(props) {
 
     return (
         <div>
-            <div key={props.userProfile.userId} style={{ backgroundImage: `url(${props.userProfile.photos.large})` }} className={s.profileUserBackground} >
-                <div className={s.profileInfo}>
-                    <img src={props.userProfile.photos.small} alt={'userAvatar'} />
-                    <div className={s.profileInfo_string}>
+            <div key={props.userProfile.userId} style={{ backgroundImage: `url(${props.userProfile.photos.large || userBaseBackground})` }} className={css.profileUserBackground} >
+                <div className={css.profileInfo}>
+                    <img src={props.userProfile.photos.small || userBaseAvatar} alt={'userAvatar'} />
+                    <div className={css.profileInfo_string}>
                         <div> {props.userProfile.aboutMe === null ? null : `Status: ${props.userProfile.aboutMe}`}</div>
                         {props.userProfile.lookingForAJob === true ? `Looking for a job: ${props.userProfile.lookingForAJobDescription}` : null}
-                        <div className={s.Contacts}>
-                            {props.userProfile.contacts === null ? null :  `Contacts: ${[
+                        <div className={css.Contacts}>
+                            {props.userProfile.contacts === null ? null : `Contacts: ${[
                                 props.userProfile.contacts.facebook,
                                 props.userProfile.contacts.github,
                                 props.userProfile.contacts.instagram,

@@ -1,8 +1,8 @@
-
+import css from './News.module.css';
 
 function News() {
     return (
-        <div>News</div>
+        <div className={css.News}>News</div>
     )
 }
 

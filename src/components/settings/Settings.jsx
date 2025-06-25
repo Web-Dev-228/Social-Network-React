@@ -1,8 +1,8 @@
-import React from 'react';
+import css from './Settings.module.css';
 
 function Settings() {
     return (
-        <div>Settings</div>
+        <div className={css.Settings}>Settings</div>
     )
 }
 

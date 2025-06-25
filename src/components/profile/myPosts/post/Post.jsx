@@ -1,20 +1,20 @@
-import s from './Post.module.css'
+import css from './Post.module.css'
 
 function Post(props) {
     return (
-        <div className={s.Post}>
+        <div className={css.Post}>
             <div>
-                <div className={s.Avatar}>
+                <div className={css.Avatar}>
                     <img src={props.src} alt="Аватар пользователя" />
-                    <div className={s.Name}>
+                    <div className={css.Name}>
                         {props.name}
                     </div>
                 </div>
-                <div className={s.Message}>
+                <div className={css.Message}>
                     {props.message}
                 </div>
                 <div>
-                    <span className={s.like}>
+                    <span className={css.like}>
                         {props.likesCount} {props.likesCount === 1 ? 'like' : 'likes'}
                     </span>
                 </div>

@@ -1,12 +1,14 @@
 import { combineReducers, legacy_createStore as createStore } from "redux";
 import profileReducer from './reducers/profileReducer';
 import messagesReducer from './reducers/messagesReducer';
-import header_navbarReducer from './reducers/header_navbarReducer';
+import authReducer from './reducers/authReducer';
+import navbarReducer from './reducers/navbarReducer';
 import friendsReducer from './reducers/friendsReducer';
 
 
 let reducers = combineReducers({
-    header_navbar: header_navbarReducer,
+    auth: authReducer,
+    navbar: navbarReducer,
     profilePage: profileReducer,
     messagesPage: messagesReducer,
     friendsPage: friendsReducer
@@ -14,6 +16,6 @@ let reducers = combineReducers({
 
 let store = createStore(reducers);
 
-window.state = store.getState();
+window.store = store;
 
 export default store;

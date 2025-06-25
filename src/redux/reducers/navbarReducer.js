@@ -1,4 +1,3 @@
-import iconSocialNetwork from '../images/header/iconSocialNetwork.png';
 import Andrew from '../images/dialogs/Andrew.jpg';
 import Viktor from '../images/dialogs/Viktor.jpg';
 import Diana from '../images/dialogs/Diana.jpg';
@@ -11,7 +10,6 @@ import imgSettings from '../images/navbar/Settings.png';
 
 
 let initialState = {
-    header: { iconSocialNetwork: iconSocialNetwork },
     navbar: { imgProfile: imgProfile, imgNews: imgNews, imgMessages: imgMessages, imgMusic: imgMusic, imgFriends: imgFriends, imgSettings: imgSettings },
     friends: [
         { id: 1, name: 'Andrew', src: Andrew },
@@ -20,9 +18,9 @@ let initialState = {
     ]
 };
 
-function header_navbarReducer(state = initialState) {
+function navbarReducer(state = initialState) {
     return state;
 }
 
 
-export default header_navbarReducer;
+export default navbarReducer;

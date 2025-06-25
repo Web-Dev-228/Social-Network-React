@@ -1,4 +1,4 @@
-import s from './MyPosts.module.css'
+import css from './MyPosts.module.css'
 import Post from './post/Post';
 
 
@@ -14,13 +14,13 @@ function MyPosts(props) {
     }
 
     return (
-        <div className={s.MyPosts}>
-            <div className={s.WordMyPosts}>
+        <div className={css.MyPosts}>
+            <div className={css.WordMyPosts}>
                 My posts
             </div>
             <div>
-                <textarea placeholder='Напишите что-нибудь' onChange={onPostChange} value={props.newPostText} className={s.Textarea} />
-                <button onClick={onAddPost} className={s.AddPost}>Add Post</button>
+                <textarea placeholder='Напишите что-нибудь' onChange={onPostChange} value={props.newPostText} className={css.Textarea} />
+                <button onClick={onAddPost} className={css.AddPost}>Add Post</button>
             </div>
             <div>
                 {props.posts.map(item =>
