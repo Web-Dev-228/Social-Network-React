@@ -1,4 +1,4 @@
-
+import userBaseAvatar from '../images/profile/Avatar.png'
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
@@ -6,7 +6,13 @@ const SET_USER_INFO = 'SET_USER_INFO';
 
 let initialState = {
     data: {},
-    userInfo: {},
+    userInfo: {
+        fullName: 'name',
+        photos: {
+            small: userBaseAvatar,
+            dig: null
+        }
+    },
     isAuth: false,
 };
 
@@ -20,7 +26,7 @@ function authReducer(state = initialState, action) {
         case TOGGLE_IS_FETCHING:
             return { ...state, isFetching: action.isFetching }
         case SET_USER_INFO:
-            return { ...state, userInfo: action.userInfo}
+            return { ...state, userInfo: action.userInfo }
         default: return state;
     }
 }

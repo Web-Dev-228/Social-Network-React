@@ -11,7 +11,7 @@ function Header(props) {
                 {props.isAuth ?
                     <div name='userInfoBlock'>
                         <img src={props.userPhoto || userBaseAvatar} alt='userPhoto' />
-                        <div>{props.userName}</div>
+                        <div>{props.userName || 'name'}</div>
                     </div> :
                     <NavLink to={'/login'} >Login</NavLink>}
             </div>

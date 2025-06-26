@@ -2,6 +2,7 @@ import css from './Friends.module.css'
 import writeMessage from '../../redux/images/friends/writeMessage.png'
 import { NavLink } from 'react-router-dom';
 import Avatar from '../../redux/images/profile/Avatar.png';
+import axios from 'axios'
 
 function Friends(props) {
 
@@ -24,8 +25,32 @@ function Friends(props) {
                             </NavLink>
                             <div>
                                 {user.followed
-                                    ? <button onClick={() => { props.unfollow(user.id) }} className={css.followed}>Follow</button>
-                                    : <button onClick={() => { props.follow(user.id) }} className={css.followed}>Unfollow</button>}
+                                    ? <button onClick={() => {
+                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/` + user.id, {
+                                            withCredentials: true,
+                                            headers: {
+                                                'API-KEY': '26a86944-1292-4936-a5d8-31af726395c8'
+                                            }
+                                        })
+                                            .then(response => {
+                                                if (response.data.resultCode === 0) {
+                                                    props.unfollow(user.id)
+                                                }
+                                            })
+                                    }} className={css.followed}>Follow</button>
+                                    : <button onClick={() => {
+                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/` + user.id, {}, {
+                                            withCredentials: true,
+                                            headers: {
+                                                'API-KEY': '26a86944-1292-4936-a5d8-31af726395c8'
+                                            }
+                                        })
+                                            .then(response => {
+                                                if (response.data.resultCode === 0) {
+                                                    props.follow(user.id)
+                                                }
+                                            })
+                                    }} className={css.followed}>Unfollow</button>}
                             </div>
                         </div>
                         <div className={css.UserInformationItem}>
