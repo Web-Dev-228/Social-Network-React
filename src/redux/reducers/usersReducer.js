@@ -26,7 +26,7 @@ let SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 let SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 let TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
-function friendsReducer(state = initialState, action) {
+function usersReducer(state = initialState, action) {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -69,4 +69,4 @@ export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isF
 
 
 
-export default friendsReducer;
+export default usersReducer;

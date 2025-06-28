@@ -3,7 +3,7 @@ import profileReducer from './reducers/profileReducer';
 import messagesReducer from './reducers/messagesReducer';
 import authReducer from './reducers/authReducer';
 import navbarReducer from './reducers/navbarReducer';
-import friendsReducer from './reducers/friendsReducer';
+import usersReducer from './reducers/usersReducer';
 
 
 let reducers = combineReducers({
@@ -11,7 +11,7 @@ let reducers = combineReducers({
     navbar: navbarReducer,
     profilePage: profileReducer,
     messagesPage: messagesReducer,
-    friendsPage: friendsReducer
+    usersPage: usersReducer
 });
 
 let store = createStore(reducers);

@@ -1,18 +1,18 @@
 import { Component } from 'react'
 import { connect } from 'react-redux';
-import Friends from './Friends'
+import Users from './Users'
 import Preloader from '../../common/Preloader/Preloader'
-import axios from 'axios'
-import { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching } from '../../redux/reducers/friendsReducer'
+import { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching } from '../../redux/reducers/usersReducer'
+import { usersAPI } from '../../API/usersAPI'
 
-class FriendsContainer extends Component {
+class UsersContainer extends Component {
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, { withCredentials: true })
-            .then(response => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
             })
             .catch(error => {
                 this.props.toggleIsFetching(false)
@@ -23,10 +23,10 @@ class FriendsContainer extends Component {
     onPageChanged = (pageNumber) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, { withCredentials: true })
-            .then(response => {
+        usersAPI.getUsers(pageNumber, this.props.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
             })
             .catch(error => {
                 this.props.toggleIsFetching(false)
@@ -37,7 +37,7 @@ class FriendsContainer extends Component {
     render() {
         return <>
             {this.props.isFetching ? <Preloader /> :
-                <Friends users={this.props.users}
+                <Users users={this.props.users}
                     pageSize={this.props.pageSize}
                     totalUsersCount={this.props.totalUsersCount}
                     currentPage={this.props.currentPage}
@@ -52,12 +52,12 @@ class FriendsContainer extends Component {
 
 function mapStateToProps(state) {
     return {
-        users: state.friendsPage.users,
-        totalUsersCount: state.friendsPage.totalUsersCount,
-        pageSize: state.friendsPage.pageSize,
-        currentPage: state.friendsPage.currentPage,
-        isFetching: state.friendsPage.isFetching
+        users: state.usersPage.users,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        pageSize: state.usersPage.pageSize,
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching
     }
 }
 
-export default connect(mapStateToProps, { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching })(FriendsContainer);
+export default connect(mapStateToProps, { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching })(UsersContainer);

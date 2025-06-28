@@ -24,7 +24,7 @@ function Navbar(props) {
                 </div>
                 <div className={css.item}>
                     <img src={props.state.navbar.imgFriends} alt='imgFriends' />
-                    <NavLink to='Friends' className={navData => navData.isActive ? css.active : css.navbar_string}> Friends </NavLink>
+                    <NavLink to='Users' className={navData => navData.isActive ? css.active : css.navbar_string}> Friends </NavLink>
                 </div>
                 <div className={css.item} >
                     <img src={props.state.navbar.imgSettings} alt='imgSettings' />

@@ -5,7 +5,7 @@ import ProfileContainer from './components/profile/ProfileContainer';
 import MessagesContainer from './components/messages/MessagesContainer';
 import News from './components/news/News';
 import Music from './components/music/Music';
-import FriendsContainer from './components/friends/FriendsContainer'
+import UsersContainer from './components/users/UsersContainer'
 import Settings from './components/settings/Settings';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -22,7 +22,7 @@ function App(props) {
           <Route path="/news" element={<News />} />
           <Route path="/messages/*" element={<MessagesContainer />} />
           <Route path='/music/' element={<Music />} />
-          <Route path='/friends/' element={<FriendsContainer />} />
+          <Route path='/users/' element={<UsersContainer />} />
           <Route path='/settings/' element={<Settings />} />
         </Routes>
       </div>

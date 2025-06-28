@@ -1,10 +1,10 @@
-import css from './Friends.module.css'
+import css from './Users.module.css'
 import writeMessage from '../../redux/images/friends/writeMessage.png'
 import { NavLink } from 'react-router-dom';
 import Avatar from '../../redux/images/profile/Avatar.png';
-import axios from 'axios'
+import { usersAPI } from '../../API/usersAPI'
 
-function Friends(props) {
+function Users(props) {
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
 
@@ -26,27 +26,17 @@ function Friends(props) {
                             <div>
                                 {user.followed
                                     ? <button onClick={() => {
-                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/` + user.id, {
-                                            withCredentials: true,
-                                            headers: {
-                                                'API-KEY': '26a86944-1292-4936-a5d8-31af726395c8'
-                                            }
-                                        })
-                                            .then(response => {
-                                                if (response.data.resultCode === 0) {
+                                        usersAPI.deleteUsers(user.id)
+                                            .then(data => {
+                                                if (data.resultCode === 0) {
                                                     props.unfollow(user.id)
                                                 }
                                             })
                                     }} className={css.followed}>Follow</button>
                                     : <button onClick={() => {
-                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/` + user.id, {}, {
-                                            withCredentials: true,
-                                            headers: {
-                                                'API-KEY': '26a86944-1292-4936-a5d8-31af726395c8'
-                                            }
-                                        })
-                                            .then(response => {
-                                                if (response.data.resultCode === 0) {
+                                        usersAPI.postUsers(user.id)
+                                            .then(data => {
+                                                if (data.resultCode === 0) {
                                                     props.follow(user.id)
                                                 }
                                             })
@@ -82,4 +72,4 @@ function Friends(props) {
     )
 }
 
-export default Friends;
+export default Users;
