@@ -16,10 +16,13 @@ function ProfileInfo(props) {
                 <div className={css.profileInfo}>
                     <img src={props.userProfile.photos.small || userBaseAvatar} alt={'userAvatar'} />
                     <div className={css.profileInfo_string}>
+                        <div>
+                            Name: {props.userProfile.fullName}
+                        </div>
                         <div> {props.userProfile.aboutMe === null ? null : `Status: ${props.userProfile.aboutMe}`}</div>
                         {props.userProfile.lookingForAJob === true ? `Looking for a job: ${props.userProfile.lookingForAJobDescription}` : null}
                         <div className={css.Contacts}>
-                            {props.userProfile.contacts === null ? null : `Contacts: ${[
+                            {/* {props.userProfile.contacts === null ? null : `Contacts: ${[
                                 props.userProfile.contacts.facebook,
                                 props.userProfile.contacts.github,
                                 props.userProfile.contacts.instagram,
@@ -28,12 +31,16 @@ function ProfileInfo(props) {
                                 props.userProfile.contacts.vk,
                                 props.userProfile.contacts.website,
                                 props.userProfile.contacts.youtube
-                            ].filter(Boolean).join(', ')}`}
+                            ].filter(Boolean).join(', ')}`} */}
+                            {props.userProfile?.contacts === null ? null : Object.values(props.userProfile.contacts)
+                                .filter(contact => contact && typeof contact === 'string' && contact.trim().length > 0)
+                                .length > 0 ? `Contacts: ${Object.values(props.userProfile.contacts)
+                                    .filter(contact => contact && typeof contact === 'string' && contact.trim().length > 0)
+                                    .join(', ')}` : null}
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

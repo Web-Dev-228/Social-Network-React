@@ -19,26 +19,31 @@ function Users(props) {
             <div>
                 {props.users.map(user =>
                     <div className={css.UserItems}>
+                        {console.log(user)}
                         <div className={css.UserAvatar}>
                             <NavLink to={`../Profile/` + user.id}>
                                 <img src={user.photos.small != null ? user.photos.small : Avatar} alt='UserAvatar' />
                             </NavLink>
                             <div>
                                 {user.followed
-                                    ? <button onClick={() => {
+                                    ? <button disabled={props.followingInProgress?.some(id => id === user.id)} onClick={() => {
+                                        props.toggleFollowingProgress(true, user.id)
                                         usersAPI.deleteUsers(user.id)
                                             .then(data => {
                                                 if (data.resultCode === 0) {
                                                     props.unfollow(user.id)
                                                 }
+                                                props.toggleFollowingProgress(false, user.id)
                                             })
                                     }} className={css.followed}>Follow</button>
-                                    : <button onClick={() => {
+                                    : <button disabled={props.followingInProgress?.some(id => id === user.id)} onClick={() => {
+                                        props.toggleFollowingProgress(true, user.id)
                                         usersAPI.postUsers(user.id)
                                             .then(data => {
                                                 if (data.resultCode === 0) {
                                                     props.follow(user.id)
                                                 }
+                                                props.toggleFollowingProgress(false, user.id)
                                             })
                                     }} className={css.followed}>Unfollow</button>}
                             </div>
