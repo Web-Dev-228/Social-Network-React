@@ -1,18 +1,7 @@
-// import Andrew from '../images/dialogs/Andrew.jpg';
-// import Viktor from '../images/dialogs/Viktor.jpg';
-// import Diana from '../images/dialogs/Diana.jpg';
-// import Egor from '../images/dialogs/Egor.jpg';
-// import Aleks from '../images/dialogs/Aleks.jpg';
-// import axios from 'axios'
+import { usersAPI } from '../../API/usersAPI'
 
 let initialState = {
-    users: [
-        // { id: 1, name: 'Andrew', followed: false, status: 'I am looking for a job right now', location: { city: 'United States', country: 'California' }, src: Andrew },
-        // { id: 2, name: 'Viktor', followed: true, status: 'I love programming', location: { city: 'Belarus', country: 'Gomel' }, src: Viktor },
-        // { id: 3, name: 'Diana', followed: true, status: 'I am so pretty!', location: { city: 'Belarus', country: 'Svetlogorsk' }, src: Diana },
-        // { id: 4, name: 'Egor', followed: true, status: 'I like football!', location: { city: 'Belarus', country: 'Gomel' }, src: Egor },
-        // { id: 5, name: 'Aleks', followed: false, status: 'I am free to help you to create good Video Production', location: { city: 'Belarus', country: 'Minsk' }, src: Aleks }
-    ],
+    users: [],
     totalUsersCount: 0,
     pageSize: 5,
     currentPage: 1,
@@ -69,14 +58,58 @@ function usersReducer(state = initialState, action) {
     }
 }
 
-export const follow = (userID) => ({ type: FOLLOW, userID })
-export const unfollow = (userID) => ({ type: UNFOLLOW, userID })
+export const followSuccess = (userID) => ({ type: FOLLOW, userID })
+export const unfollowSuccess = (userID) => ({ type: UNFOLLOW, userID })
 export const setUsers = (users) => ({ type: SET_USERS, users })
 export const setCurrentPage = (pageNumber) => ({ type: SET_CURRENT_PAGE, pageNumber })
 export const setTotalUsersCount = (totalCount) => ({ type: SET_TOTAL_USERS_COUNT, totalCount })
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
 export const toggleFollowingProgress = (followingProgress, userId) => ({ type: TOGGLE_FOLLOWING_PROGRESS, followingProgress, userId })
 
+
+export const getUsers = (pageNumber, currentPage, pageSize) => { // Thunk Creator 
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true))
+        usersAPI.getUsers(pageNumber, currentPage, pageSize)
+            .then(data => {
+                dispatch(setCurrentPage(pageNumber))
+                dispatch(toggleIsFetching(false))
+                dispatch(setUsers(data.items))
+                dispatch(setTotalUsersCount(data.totalCount))
+                console.log(data)
+            })
+            .catch(error => {
+                dispatch(toggleIsFetching(false))
+                console.error("Ошибка загрузки данных:", error);
+            })
+    }
+}
+
+export const follow = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingProgress(true, userId))
+        usersAPI.follow(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(followSuccess(userId))
+                }
+                dispatch(toggleFollowingProgress(false, userId))
+            })
+    }
+}
+
+export const unfollow = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingProgress(true, userId))
+        usersAPI.unfollow(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(unfollowSuccess(userId))
+                }
+                dispatch(toggleFollowingProgress(false, userId))
+            })
+    }
+}
 
 
 export default usersReducer;

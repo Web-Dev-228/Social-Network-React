@@ -1,3 +1,4 @@
+import { profileAPI } from '../../API/profileAPI'
 import Andrew from '../images/dialogs/Andrew.jpg';
 import Diana from '../images/dialogs/Diana.jpg';
 import Avatar from '../images/profile/avaAndrew.jpg';
@@ -45,6 +46,18 @@ function profileReducer(state = initialState, action) {
 export const addPostActionCreator = () => ({ type: ADD_POST });
 export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newPostText: text });
 export const setUserProfile = (userProfile) => ({ type: SET_USER_PROFILE, userProfile })
+
+export const getUserProfile = (userId) => {
+    return (dispatch) => {
+        profileAPI.getUserProfile(userId)
+            .then(data => {
+                dispatch(setUserProfile(data))
+            })
+            .catch(error => {
+                console.error("Ошибка загрузки данных:", error);
+            });
+    }
+}
 
 
 export default profileReducer;

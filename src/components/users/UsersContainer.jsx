@@ -2,36 +2,15 @@ import { Component } from 'react'
 import { connect } from 'react-redux';
 import Users from './Users'
 import Preloader from '../../common/Preloader/Preloader'
-import { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress } from '../../redux/reducers/usersReducer'
-import { usersAPI } from '../../API/usersAPI'
+import { follow, unfollow, toggleFollowingProgress, getUsers } from '../../redux/reducers/usersReducer'
 
 class UsersContainer extends Component {
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-                this.props.setTotalUsersCount(data.totalCount)
-            })
-            .catch(error => {
-                this.props.toggleIsFetching(false)
-                console.error("Ошибка загрузки данных:", error);
-            });
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber)
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(pageNumber, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-            })
-            .catch(error => {
-                this.props.toggleIsFetching(false)
-                console.error("Ошибка загрузки данных:", error);
-            });
+        this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -62,4 +41,6 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress })(UsersContainer);
+export default connect(mapStateToProps, {
+    follow, unfollow, toggleFollowingProgress, getUsers
+})(UsersContainer);

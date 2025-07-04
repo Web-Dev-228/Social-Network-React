@@ -9,7 +9,7 @@ const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/'
 })
 
-export const headerAPI = {
+export const authAPI = {
     getAuthUserData() {
         return instance.get(`auth/me`)
             .then(response => {

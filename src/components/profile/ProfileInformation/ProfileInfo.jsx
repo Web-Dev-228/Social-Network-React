@@ -22,16 +22,6 @@ function ProfileInfo(props) {
                         <div> {props.userProfile.aboutMe === null ? null : `Status: ${props.userProfile.aboutMe}`}</div>
                         {props.userProfile.lookingForAJob === true ? `Looking for a job: ${props.userProfile.lookingForAJobDescription}` : null}
                         <div className={css.Contacts}>
-                            {/* {props.userProfile.contacts === null ? null : `Contacts: ${[
-                                props.userProfile.contacts.facebook,
-                                props.userProfile.contacts.github,
-                                props.userProfile.contacts.instagram,
-                                props.userProfile.contacts.mainLink,
-                                props.userProfile.contacts.twitter,
-                                props.userProfile.contacts.vk,
-                                props.userProfile.contacts.website,
-                                props.userProfile.contacts.youtube
-                            ].filter(Boolean).join(', ')}`} */}
                             {props.userProfile?.contacts === null ? null : Object.values(props.userProfile.contacts)
                                 .filter(contact => contact && typeof contact === 'string' && contact.trim().length > 0)
                                 .length > 0 ? `Contacts: ${Object.values(props.userProfile.contacts)

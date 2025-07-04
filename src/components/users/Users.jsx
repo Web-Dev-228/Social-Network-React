@@ -2,7 +2,6 @@ import css from './Users.module.css'
 import writeMessage from '../../redux/images/friends/writeMessage.png'
 import { NavLink } from 'react-router-dom';
 import Avatar from '../../redux/images/profile/Avatar.png';
-import { usersAPI } from '../../API/usersAPI'
 
 function Users(props) {
 
@@ -27,24 +26,10 @@ function Users(props) {
                             <div>
                                 {user.followed
                                     ? <button disabled={props.followingInProgress?.some(id => id === user.id)} onClick={() => {
-                                        props.toggleFollowingProgress(true, user.id)
-                                        usersAPI.deleteUsers(user.id)
-                                            .then(data => {
-                                                if (data.resultCode === 0) {
-                                                    props.unfollow(user.id)
-                                                }
-                                                props.toggleFollowingProgress(false, user.id)
-                                            })
+                                        props.unfollow(user.id)
                                     }} className={css.followed}>Follow</button>
                                     : <button disabled={props.followingInProgress?.some(id => id === user.id)} onClick={() => {
-                                        props.toggleFollowingProgress(true, user.id)
-                                        usersAPI.postUsers(user.id)
-                                            .then(data => {
-                                                if (data.resultCode === 0) {
-                                                    props.follow(user.id)
-                                                }
-                                                props.toggleFollowingProgress(false, user.id)
-                                            })
+                                        props.follow(user.id)
                                     }} className={css.followed}>Unfollow</button>}
                             </div>
                         </div>
@@ -69,8 +54,8 @@ function Users(props) {
                 )}
             </div>
             <div className={css.pagesNumber}>
-                {pages.map(p => {
-                    return <span className={props.currentPage === p ? css.active : css.notActive} onClick={(e) => { props.onPageChanged(p) }}> {p}</span>
+                {pages.map(pages => {
+                    return <span className={props.currentPage === pages ? css.active : css.notActive} onClick={(e) => { props.onPageChanged(pages) }}> {pages}</span>
                 })}
             </div>
         </div>
