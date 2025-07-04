@@ -6,9 +6,7 @@ import Avatar from '../../redux/images/profile/Avatar.png';
 function Users(props) {
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-
     let pages = [];
-
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
