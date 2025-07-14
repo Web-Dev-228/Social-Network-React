@@ -47,16 +47,14 @@ export const addPostActionCreator = () => ({ type: ADD_POST });
 export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newPostText: text });
 export const setUserProfile = (userProfile) => ({ type: SET_USER_PROFILE, userProfile })
 
-export const getUserProfile = (userId) => {
-    return (dispatch) => {
-        profileAPI.getUserProfile(userId)
-            .then(data => {
-                dispatch(setUserProfile(data))
-            })
-            .catch(error => {
-                console.error("Ошибка загрузки данных:", error);
-            });
-    }
+export const getUserProfile = (userId) => (dispatch) => {
+    profileAPI.getUserProfile(userId)
+        .then(data => {
+            dispatch(setUserProfile(data))
+        })
+        .catch(error => {
+            console.error("Ошибка загрузки данных:", error);
+        });
 }
 
 

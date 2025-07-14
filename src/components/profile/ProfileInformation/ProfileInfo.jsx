@@ -17,7 +17,7 @@ function ProfileInfo(props) {
                     <img src={props.userProfile.photos.small || userBaseAvatar} alt={'userAvatar'} />
                     <div className={css.profileInfo_string}>
                         <div>
-                            Name: {props.userProfile.fullName}
+                            Name: {props.userProfile.fullName || 'Name'}
                         </div>
                         <div> {props.userProfile.aboutMe === null ? null : `Status: ${props.userProfile.aboutMe}`}</div>
                         {props.userProfile.lookingForAJob === true ? `Looking for a job: ${props.userProfile.lookingForAJobDescription}` : null}

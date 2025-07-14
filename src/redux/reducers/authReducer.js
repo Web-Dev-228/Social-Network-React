@@ -35,26 +35,25 @@ function authReducer(state = initialState, action) {
 export const setUserInfo = (userInfo) => ({ type: SET_USER_INFO, userInfo })
 export const setAuthUserData = (id, email, login) => ({ type: SET_USER_DATA, data: { id, email, login } })
 
-export const getAuthAndUserInfo = () => {
-    return (dispatch) => {
-        authAPI.getAuthUserData()
-            .then(data => {
-                if (data.resultCode === 0) {
-                    let { id, email, login } = data.data;
-                    dispatch(setAuthUserData(id, email, login))
-                    authAPI.getUserInfo(id)
-                        .then(data => {
-                            dispatch(setUserInfo(data))
-                        })
-                        .catch(error => {
-                            console.error("Ошибка загрузки данных:", error);
-                        });
-                }
-            })
-            .catch(error => {
-                console.error("Ошибка загрузки данных:", error);
-            });
-    }
-}
+export const getAuthAndUserInfo = () => (dispatch) => {
+    authAPI.getAuthUserData()
+        .then(data => {
+            if (data.resultCode === 0) {
+                let { id, email, login } = data.data;
+                dispatch(setAuthUserData(id, email, login))
+                authAPI.getUserInfo(id)
+                    .then(data => {
+                        dispatch(setUserInfo(data))
+                    })
+                    .catch(error => {
+                        console.error("Ошибка загрузки данных:", error);
+                    });
+            }
+        })
+        .catch(error => {
+            console.error("Ошибка загрузки данных:", error);
+        });
+} 
+
 
 export default authReducer;

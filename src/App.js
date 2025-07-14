@@ -19,6 +19,7 @@ function App(props) {
         <Navbar state={props.state.navbar} />
         <Routes>
           <Route path="/profile/:userId?" element={<ProfileContainer />} />
+          <Route path="/login" element={<ProfileContainer />} />  
           <Route path="/news" element={<News />} />
           <Route path="/messages/*" element={<MessagesContainer />} />
           <Route path='/music/' element={<Music />} />
