@@ -2,6 +2,7 @@ import './App.css';
 import HeaderContainer from './components/header/HeaderContainer';
 import Navbar from './components/navbar/Navbar';
 import ProfileContainer from './components/profile/ProfileContainer';
+import Login from './components/login/Login';
 import MessagesContainer from './components/messages/MessagesContainer';
 import News from './components/news/News';
 import Music from './components/music/Music';
@@ -19,7 +20,7 @@ function App(props) {
         <Navbar state={props.state.navbar} />
         <Routes>
           <Route path="/profile/:userId?" element={<ProfileContainer />} />
-          <Route path="/login" element={<ProfileContainer />} />  
+          <Route path="/login" element={<Login />} />  
           <Route path="/news" element={<News />} />
           <Route path="/messages/*" element={<MessagesContainer />} />
           <Route path='/music/' element={<Music />} />

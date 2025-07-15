@@ -1,14 +1,9 @@
 import css from './ProfileInfo.module.css';
-import Preloader from '../../../common/Preloader/Preloader'
 import userBaseAvatar from '../../../redux/images/profile/Avatar.png'
 import userBaseBackground from '../../../redux/images/profile/UserBackground.jpg'
 
 
 function ProfileInfo(props) {
-
-    if (!props.userProfile) {
-        return <Preloader />
-    }
 
     return (
         <div>

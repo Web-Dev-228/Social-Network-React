@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { Navigate } from "react-router-dom";
 import Messages from './Messages'
 import { addMessageActionCreator, updateNewMessageBodyActionCreator } from '../../redux/reducers/messagesReducer'
 
@@ -6,7 +7,8 @@ import { addMessageActionCreator, updateNewMessageBodyActionCreator } from '../.
 function mapStateToProps(state) {
     return {
         messages: state.messagesPage.messages,
-        newMessageBody: state.messagesPage.newMessageBody
+        newMessageBody: state.messagesPage.newMessageBody,
+        isAuth: state.auth.isAuth
     }
 }
 
@@ -21,6 +23,11 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages);
+function AuthNavigateComponent(props) {
+    if (!props.isAuth) return <Navigate to='/login' />;
+    return <Messages {...props} />
+}
+
+const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(AuthNavigateComponent);
 
 export default MessagesContainer;
