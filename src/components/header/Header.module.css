@@ -19,16 +19,33 @@
 
 .LoginBlock {
     float: right;
+
 }
 
 .LoginBlock img {
     float: left;
     width: 45px;
     margin-right: 10px;
+    margin-top: -22px;
 }
 
 .LoginBlock a,
 .LoginBlock div {
     float: right;
-    margin-top: 5px
+    margin-top: -15px;
+}
+
+.LoginLink {
+    position: relative;
+    top: -15px;
+    left: -5px;
+}
+
+.SocialNetworkName {
+    margin-top: -43px;
+    margin-left: 60px;
+    font-size: 1.25em;
+    font-style: italic;
+    color: white;
+    font-weight: bold;
 }

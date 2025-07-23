@@ -1,8 +1,10 @@
 import { Component } from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
+import {compose} from 'redux'
 import Users from './Users'
 import Preloader from '../../common/Preloader/Preloader'
 import { follow, unfollow, getUsers } from '../../redux/reducers/usersReducer'
+import withAuthNavigation from '../../hoc/withAuthNavigation'
 
 class UsersContainer extends Component {
     componentDidMount() {
@@ -40,6 +42,7 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {
-    follow, unfollow, getUsers
-})(UsersContainer);
+export default compose(
+    withAuthNavigation,
+    connect(mapStateToProps, { follow, unfollow, getUsers })
+)(UsersContainer)
