@@ -1,15 +1,17 @@
 import css from './ProfileInfo.module.css';
 import userBaseAvatar from '../../../redux/images/profile/Avatar.png'
 import userBaseBackground from '../../../redux/images/profile/UserBackground.jpg'
+import myPhoto from '../../../redux/images/dialogs/Andrew.jpg'
+import ProfileStatus from './ProfileStatus'
 
 
 function ProfileInfo(props) {
-
+debugger
     return (
         <div>
             <div key={props.userProfile.userId} style={{ backgroundImage: `url(${props.userProfile.photos.large || userBaseBackground})` }} className={css.profileUserBackground} >
                 <div className={css.profileInfo}>
-                    <img src={props.userProfile.photos.small || userBaseAvatar} alt={'userAvatar'} />
+                    <img src={myPhoto || props.userProfile.photos.small || userBaseAvatar} alt={'userAvatar'} />
                     <div className={css.profileInfo_string}>
                         <div>
                             Name: {props.userProfile.fullName || 'Name'}
@@ -23,6 +25,7 @@ function ProfileInfo(props) {
                                     .filter(contact => contact && typeof contact === 'string' && contact.trim().length > 0)
                                     .join(', ')}` : null}
                         </div>
+                        <ProfileStatus status={props.status} />
                     </div>
                 </div>
             </div>
