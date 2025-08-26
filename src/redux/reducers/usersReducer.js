@@ -67,7 +67,8 @@ export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isF
 export const toggleFollowingProgress = (followingProgress, userId) => ({ type: TOGGLE_FOLLOWING_PROGRESS, followingProgress, userId })
 
 
-export const getUsers = (pageNumber, currentPage, pageSize) => { // Thunk Creator 
+// Thunk Creators
+export const getUsers = (pageNumber, currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true))
         usersAPI.getUsers(pageNumber, currentPage, pageSize)
@@ -107,6 +108,13 @@ export const unfollow = (userId) => (dispatch) => {
             }
             dispatch(toggleFollowingProgress(false, userId))
         })
+}
+
+/// ????
+function update() {
+    console.log("Обновление данных или интерфейса");
+
+    setTimeout(update, 5000);
 }
 
 
