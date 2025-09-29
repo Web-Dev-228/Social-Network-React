@@ -55,11 +55,3 @@ let store = {
 
 
 export default store;
-
-import Andrew from './images/dialogs/Andrew.jpg';
-import Viktor from './images/dialogs/Viktor.jpg';
-import Diana from './images/dialogs/Diana.jpg';
-import Egor from './images/dialogs/Egor.jpg';
-import Aleks from './images/dialogs/Aleks.jpg';
-import profileReducer from './reducers/profileReducer';
-import messagesReducer from './reducers/messagesReducer';
