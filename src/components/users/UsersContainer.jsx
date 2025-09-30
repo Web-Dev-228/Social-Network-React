@@ -45,4 +45,4 @@ function mapStateToProps(state) {
 export default compose(
     withAuthNavigation,
     connect(mapStateToProps, { follow, unfollow, getUsers })
-)(UsersContainer)
+)(UsersContainer) 

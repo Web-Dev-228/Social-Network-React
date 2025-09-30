@@ -10,7 +10,10 @@ function Profile(props) {
 
     return (
         <div>
-            <ProfileInfo userProfile={props.userProfile} userInfo={props.userInfo} status={"samurai sila"} />
+            <ProfileInfo userProfile={props.userProfile}
+                userInfo={props.userInfo}
+                userStatus={props.userStatus}
+                registeredUserId={props.userId} />
             <MyPostsContainer />
         </div>
     )

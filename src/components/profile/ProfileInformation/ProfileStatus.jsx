@@ -7,9 +7,12 @@ class ProfileStatus extends Component {
     }
 
     activateEditMode = () => {
-        this.setState({
-            editMode: true
-        })
+        this.props.registeredUserId === this.props.currentUserId ?
+            this.setState({
+                editMode: true
+            }) : this.setState({
+                editMode: false
+            })
     }
 
     deactivateEditMode = () => {
@@ -19,16 +22,20 @@ class ProfileStatus extends Component {
     }
 
     render() {
+        const userStatus = this.props.registeredUserId === this.props.currentUserId ?
+            (this.props.userStatus === null ? 'Please enter your status' : this.props.userStatus)
+            : this.props.userStatus
+
         return (
             <div className='Status'>
                 {!this.state.editMode &&
                     <div>
-                        <span onClick={this.activateEditMode}>{this.props.status}</span>
+                        <span onClick={this.activateEditMode}>{userStatus}</span>
                     </div>
                 }
                 {this.state.editMode &&
                     <div>
-                        <input onBlur={this.deactivateEditMode} value={this.props.status} />
+                        <input onBlur={this.deactivateEditMode} value={userStatus} />
                     </div>
                 }
             </div>

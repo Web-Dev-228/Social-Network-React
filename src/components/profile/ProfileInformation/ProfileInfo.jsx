@@ -23,7 +23,10 @@ function ProfileInfo(props) {
                                     .filter(contact => contact && typeof contact === 'string' && contact.trim().length > 0)
                                     .join(', ')}` : null}
                         </div>
-                        <ProfileStatus status={props.status} />
+                        <ProfileStatus userStatus={props.userStatus} 
+                        registeredUserId={props.registeredUserId} 
+                        currentUserId={props.userProfile.userId}
+                        />
                     </div>
                 </div>
             </div>
