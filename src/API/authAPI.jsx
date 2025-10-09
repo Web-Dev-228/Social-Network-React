@@ -18,8 +18,5 @@ export const authAPI = {
     },
     getUserInfo(id) {
         return instance.get(`profile/` + id)
-            .then(response => {
-                return response.data
-            })
     }
 }

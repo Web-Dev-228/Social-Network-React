@@ -1,6 +1,9 @@
 import { Component } from 'react'
+import React from 'react'
 
 class ProfileStatus extends Component {
+
+    statusInputRef = React.createRef()
 
     state = {
         editMode: false
@@ -19,6 +22,7 @@ class ProfileStatus extends Component {
         this.setState({
             editMode: false
         })
+        this.props.updateStatus(this.statusInpetRef.current.value)
     }
 
     render() {
@@ -35,7 +39,7 @@ class ProfileStatus extends Component {
                 }
                 {this.state.editMode &&
                     <div>
-                        <input onBlur={this.deactivateEditMode} value={userStatus} />
+                        <input ref={this.statusInputRef} autoFocus={true} onBlur={this.deactivateEditMode} value={userStatus} />
                     </div>
                 }
             </div>

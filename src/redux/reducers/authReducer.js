@@ -42,8 +42,8 @@ export const getAuthAndUserInfo = () => (dispatch) => {
                 let { id, email, login } = data.data;
                 dispatch(setAuthUserData(id, email, login))
                 authAPI.getUserInfo(id)
-                    .then(data => {
-                        dispatch(setUserInfo(data))
+                    .then(response => {
+                        dispatch(setUserInfo(response.data))
                     })
                     .catch(error => {
                         console.error("Ошибка загрузки данных:", error);

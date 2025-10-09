@@ -54,8 +54,8 @@ export const setUserStatus = (userStatus) => ({ type: SET_USER_STATUS, userStatu
 
 export const getUserProfile = (userId) => (dispatch) => {
     profileAPI.getUserProfile(userId)
-        .then(data => {
-            dispatch(setUserProfile(data))
+        .then(response => {
+            dispatch(setUserProfile(response.data))
         })
         .catch(error => {
             console.error("Ошибка загрузки данных:", error);
@@ -63,8 +63,8 @@ export const getUserProfile = (userId) => (dispatch) => {
 };
 export const getUserStatus = (userId) => (dispatch) => {
     profileAPI.getUserStatus(userId)
-        .then(data => {
-            dispatch(setUserStatus(data))
+        .then(response => {
+            dispatch(setUserStatus(response.data))
         })
         .catch(error => {
             console.error("Ошибка загрузки данных:", error);
