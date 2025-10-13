@@ -12,8 +12,9 @@ function Profile(props) {
         <div>
             <ProfileInfo userProfile={props.userProfile}
                 userInfo={props.userInfo}
-                userStatus={props.userStatus}
-                registeredUserId={props.userId} />
+                status={props.status}
+                registeredUserId={props.userId}
+                updateUserStatus={props.updateUserStatus} />
             <MyPostsContainer />
         </div>
     )

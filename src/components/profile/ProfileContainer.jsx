@@ -2,7 +2,7 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import Profile from './Profile'
-import { getUserProfile, getUserStatus } from '../../redux/reducers/profileReducer'
+import { getUserProfile, getUserStatus, updateUserStatus } from '../../redux/reducers/profileReducer'
 import withAuthNavigation from '../../hoc/withAuthNavigation'
 import withRouterProfile from '../../hoc/withRouterProfile'
 
@@ -30,7 +30,7 @@ function mapStateToProps(state) {
         newPostText: state.profilePage.newPostText,
         userInfo: state.profilePage.userInfo,
         userProfile: state.profilePage.userProfile,
-        userStatus: state.profilePage.userStatus,
+        status: state.profilePage.status,
         userId: state.auth.data.id
     }
 }
@@ -39,5 +39,5 @@ function mapStateToProps(state) {
 export default compose(
     withRouterProfile,
     withAuthNavigation,
-    connect(mapStateToProps, { getUserProfile, getUserStatus })
+    connect(mapStateToProps, { getUserProfile, getUserStatus, updateUserStatus })
 )(ProfileContainer);

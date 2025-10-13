@@ -1,4 +1,5 @@
 import { combineReducers, legacy_createStore as createStore, applyMiddleware } from "redux";
+import { reducer as formReducer } from 'redux-form'
 import { thunk } from 'redux-thunk';
 import profileReducer from './reducers/profileReducer';
 import messagesReducer from './reducers/messagesReducer';
@@ -12,7 +13,8 @@ let reducers = combineReducers({
     navbar: navbarReducer,
     profilePage: profileReducer,
     messagesPage: messagesReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    form: formReducer
 });
 
 

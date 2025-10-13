@@ -55,5 +55,4 @@ export const getAuthAndUserInfo = () => (dispatch) => {
         });
 } 
 
-
 export default authReducer;

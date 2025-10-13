@@ -22,21 +22,21 @@ function usersReducer(state = initialState, action) {
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userID) {
-                        return { ...u, followed: true }
+                users: state.users.map(users => {
+                    if (users.id === action.userID) {
+                        return { ...users, followed: true }
                     }
-                    return u
+                    return users
                 })
             }
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userID) {
-                        return { ...u, followed: false }
+                users: state.users.map(users => {
+                    if (users.id === action.userID) {
+                        return { ...users, followed: false }
                     }
-                    return u
+                    return users
                 })
             }
         case SET_USERS:
@@ -76,8 +76,7 @@ export const getUsers = (pageNumber, currentPage, pageSize) => {
                 dispatch(setCurrentPage(pageNumber))
                 dispatch(toggleIsFetching(false))
                 dispatch(setUsers(data.items))
-                dispatch(setTotalUsersCount(data.totalCount))
-                console.log(data)
+                dispatch(setTotalUsersCount(data.totalCount))   
             })
             .catch(error => {
                 dispatch(toggleIsFetching(false))

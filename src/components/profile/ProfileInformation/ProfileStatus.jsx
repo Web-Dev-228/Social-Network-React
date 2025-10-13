@@ -1,12 +1,10 @@
 import { Component } from 'react'
-import React from 'react'
 
 class ProfileStatus extends Component {
 
-    statusInputRef = React.createRef()
-
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
 
     activateEditMode = () => {
@@ -22,24 +20,34 @@ class ProfileStatus extends Component {
         this.setState({
             editMode: false
         })
-        this.props.updateStatus(this.statusInpetRef.current.value)
+        this.props.updateUserStatus(this.state.status)
+    }
+
+    onStatusChange = (e) => {
+        this.setState({
+            status: e.currentTarget.value
+        })
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
     }
 
     render() {
-        const userStatus = this.props.registeredUserId === this.props.currentUserId ?
-            (this.props.userStatus === null ? 'Please enter your status' : this.props.userStatus)
-            : this.props.userStatus
-
         return (
             <div className='Status'>
                 {!this.state.editMode &&
                     <div>
-                        <span onClick={this.activateEditMode}>{userStatus}</span>
+                        <span onDoubleClick={this.activateEditMode}>{this.state.status || 'no status'}</span>
                     </div>
                 }
                 {this.state.editMode &&
                     <div>
-                        <input ref={this.statusInputRef} autoFocus={true} onBlur={this.deactivateEditMode} value={userStatus} />
+                        <input onChange={this.onStatusChange} autoFocus={true} onBlur={this.deactivateEditMode} value={this.state.status} />
                     </div>
                 }
             </div>

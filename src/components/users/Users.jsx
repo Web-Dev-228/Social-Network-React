@@ -16,7 +16,6 @@ function Users(props) {
             <div>
                 {props.users.map(user =>
                     <div className={css.UserItems}>
-                        {console.log(user)}
                         <div className={css.UserAvatar}>
                             <NavLink to={`../Profile/` + user.id}>
                                 <img src={user.photos.small != null ? user.photos.small : Avatar} alt='UserAvatar' />
