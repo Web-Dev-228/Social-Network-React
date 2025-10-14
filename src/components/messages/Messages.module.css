@@ -5,7 +5,7 @@
   border-color: rgb(77, 77, 77);
 }
 
-.Textarea {
+.Message {
   width: 93%;
   min-height: 50px;
   resize: vertical;
@@ -22,11 +22,11 @@
   outline: none;
 }
 
-textarea:focus {
+input:focus {
   border-color: #007bff;
 }
 
-textarea:hover {
+input:hover {
   border-color: #0056b3;
 }
 

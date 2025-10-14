@@ -1,13 +1,17 @@
 import css from './Login.module.css'
+import LoginReduxForm from './LoginForm'
 
 
-function Login() {
+function Login(props) {
+    const onSubmit = (formData) => {
+        console.log(formData)
+    }
+
     return (
         <div>
             <div className={css.Auth}>
                 <h1>Login to Letter</h1>
-                <div>Enter your login:</div>
-                <div>Enter your password:</div>
+                <LoginReduxForm onSubmit={onSubmit} />
             </div>
         </div>
     )

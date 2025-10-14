@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux'
 import withAuthNavigation from '../../hoc/withAuthNavigation'
 import Messages from './Messages'
-import { addMessageActionCreator, updateNewMessageBodyActionCreator } from '../../redux/reducers/messagesReducer'
+import { addMessage } from '../../redux/reducers/messagesReducer'
 
 
 function mapStateToProps(state) {
@@ -15,12 +15,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        sendMessage: () => {
-            dispatch(addMessageActionCreator())
+        addMessage: (message) => {
+            dispatch(addMessage(message))
         },
-        messageChange: (value) => {
-            dispatch(updateNewMessageBodyActionCreator(value))
-        }
+        // messageChange: (value) => {
+        //     dispatch(updateNewMessageBodyActionCreator(value))
+        // }
     }
 }
 

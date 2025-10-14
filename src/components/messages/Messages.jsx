@@ -1,14 +1,15 @@
 import DialogsItems from './Dialogs/DialogsItems'
 import css from './Messages.module.css';
+import { Field, reduxForm } from 'redux-form'
 
 function Messages(props) {
 
-  function onSendMessage() {
-    props.sendMessage();
-  }
+  // function onMessageChange(e) {
+  //   props.messageChange(e.target.value);
+  // }
 
-  function onMessageChange(e) {
-    props.messageChange(e.target.value);
+  function onSubmit(message) {
+    props.addMessage(message.message);
   }
 
   return (
@@ -24,12 +25,22 @@ function Messages(props) {
           />
         )}
       </div>
-      <div className={css.SendTextarea}>
-        <textarea placeholder='Напишите что-нибудь' onChange={onMessageChange} value={props.newMessageBody} className={css.Textarea} />
-        <button onClick={onSendMessage} className={css.AddMessage}>Send</button>
-      </div>
+      <LoginReduxForm onSubmit={onSubmit} />
     </div>
   )
 }
+
+function messageForm(props) {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div className={css.SendMessage}>
+        <Field placeholder={'Напишите что-нибудь'} name={'message'} component={'input'} className={css.Message} />
+        <button className={css.AddMessage}>Send</button>
+      </div>
+    </form>
+  )
+}
+
+export const LoginReduxForm = reduxForm({ form: 'message' })(messageForm)
 
 export default Messages;

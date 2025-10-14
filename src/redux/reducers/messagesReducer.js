@@ -17,16 +17,16 @@ let initialState = {
 };
 
 
-let SEND_MESSAGE = 'SEND-MESSAGE';
-let UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
+let ADD_MESSAGE = 'ADD-MESSAGE';
+// let UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 
 function messagesReducer(state = initialState, action) {
     switch (action.type) {
-        case SEND_MESSAGE: {
+        case ADD_MESSAGE: {
             let newMessage = {
                 id: state.messages.length + 1,
                 name: 'Andrew',
-                message: state.newMessageBody,
+                message: action.message,
                 src: Andrew
             };
             return {
@@ -35,18 +35,18 @@ function messagesReducer(state = initialState, action) {
                 newMessageBody: ''
             }
         }
-        case UPDATE_NEW_MESSAGE_BODY: {
-            return {
-                ...state,
-                newMessageBody: action.newMessageBody,
-            }
-        }
+        // case UPDATE_NEW_MESSAGE_BODY: {
+        //     return {
+        //         ...state,
+        //         newMessageBody: action.newMessageBody,
+        //     }
+        // }
         default: return state;
     }
 }
 
-export const addMessageActionCreator = () => ({ type: SEND_MESSAGE });
-export const updateNewMessageBodyActionCreator = (text) => ({ type: UPDATE_NEW_MESSAGE_BODY, newMessageBody: text });
+export const addMessage = (message) => ({ type: ADD_MESSAGE, message });
+// export const updateNewMessageBodyActionCreator = (text) => ({ type: UPDATE_NEW_MESSAGE_BODY, newMessageBody: text });
 
 
 export default messagesReducer;
