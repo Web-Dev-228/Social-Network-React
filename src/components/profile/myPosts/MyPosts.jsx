@@ -1,16 +1,12 @@
 import css from './MyPosts.module.css'
 import Post from './post/Post';
+import NewPostReduxForm from './newPostForm/newPostForm'
 
 
 function MyPosts(props) {
 
-    function onAddPost() {
-        props.addPost();
-    }
-
-    // e. поступает от onChange, из-за 'on'
-    function onPostChange(e) {
-        props.updateNewPostText(e.target.value);
+    function addPost(formData) {
+        props.addPost(formData.newPostText);
     }
 
     return (
@@ -18,10 +14,7 @@ function MyPosts(props) {
             <div className={css.WordMyPosts}>
                 My posts
             </div>
-            <div>
-                <textarea placeholder='Напишите что-нибудь' onChange={onPostChange} value={props.newPostText} className={css.Textarea} />
-                <button onClick={onAddPost} className={css.AddPost}>Add Post</button>
-            </div>
+            <NewPostReduxForm onSubmit={addPost} />
             <div>
                 {props.posts.map(item =>
                     <Post

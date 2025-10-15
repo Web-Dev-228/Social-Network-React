@@ -1,15 +1,11 @@
 import DialogsItems from './Dialogs/DialogsItems'
 import css from './Messages.module.css';
-import { Field, reduxForm } from 'redux-form'
+import NewMessageReduxForm from './newMessagesForm/newMessageForm'
 
 function Messages(props) {
 
-  // function onMessageChange(e) {
-  //   props.messageChange(e.target.value);
-  // }
-
-  function onSubmit(message) {
-    props.addMessage(message.message);
+  function addMessage(formData) {
+    props.addMessage(formData.newMessageText);
   }
 
   return (
@@ -25,22 +21,9 @@ function Messages(props) {
           />
         )}
       </div>
-      <LoginReduxForm onSubmit={onSubmit} />
+      <NewMessageReduxForm onSubmit={addMessage} />
     </div>
   )
 }
-
-function messageForm(props) {
-  return (
-    <form onSubmit={props.handleSubmit}>
-      <div className={css.SendMessage}>
-        <Field placeholder={'Напишите что-нибудь'} name={'message'} component={'input'} className={css.Message} />
-        <button className={css.AddMessage}>Send</button>
-      </div>
-    </form>
-  )
-}
-
-export const LoginReduxForm = reduxForm({ form: 'message' })(messageForm)
 
 export default Messages;

@@ -12,12 +12,10 @@ let initialState = {
         { id: 2, name: 'Diana', message: 'Hi, how are you? I registered for the first time in this social network and I am looking for friends, and I would be very happy if it was you', likesCount: 12, src: Diana },
         { id: 3, name: 'Andrew', message: 'It`s my first post!', likesCount: 20, src: Andrew },
     ],
-    newPostText: '',
     status: ''
 };
 
 let ADD_POST = 'ADD-POST';
-let UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 let SET_USER_PROFILE = 'SET_USER_PROFILE'
 let SET_USER_STATUS = 'SET_USER_STATUS'
 let SET_NEW_STATUS = 'SET_NEW_STATUS'
@@ -29,17 +27,14 @@ function profileReducer(state = initialState, action) {
             let newPost = {
                 id: state.posts.length + 1,
                 name: 'Andrew',
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0,
                 src: Andrew
             };
             return {
                 ...state,
-                posts: [...state.posts, newPost],
-                newPostText: ''
+                posts: [...state.posts, newPost]
             }
-        case UPDATE_NEW_POST_TEXT:
-            return { ...state, newPostText: action.newPostText, }
         case SET_USER_PROFILE:
             return { ...state, userProfile: action.userProfile }
         case SET_USER_STATUS:
@@ -50,8 +45,7 @@ function profileReducer(state = initialState, action) {
     }
 }
 
-export const addPostActionCreator = () => ({ type: ADD_POST });
-export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newPostText: text });
+export const addPost = (newPostText) => ({ type: ADD_POST, newPostText });
 export const setUserProfile = (userProfile) => ({ type: SET_USER_PROFILE, userProfile });
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status })
 export const setNewStatus = (status) => ({ type: SET_NEW_STATUS, status })
