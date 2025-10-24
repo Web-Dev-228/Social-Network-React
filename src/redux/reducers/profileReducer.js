@@ -1,18 +1,19 @@
 import { profileAPI } from '../../API/profileAPI'
 import Andrew from '../images/dialogs/Andrew.jpg';
 import Diana from '../images/dialogs/Diana.jpg';
-// import Avatar from '../images/profile/avaAndrew.jpg';
-// import Background from '../images/profile/UserBackground.jpg';
+import Avatar from '../images/profile/avaAndrew.jpg';
+import Background from '../images/profile/UserBackground.jpg';
 
 let initialState = {
     userProfile: null,
-    // userInfo: { id: 1, name: 'Andrew', description: '+ description', userAvatar: Avatar, userBackground: Background },
+    userInfo: { id: 1, name: 'Andrew', description: '+ description', userAvatar: Avatar, userBackground: Background },
     posts: [
         { id: 1, name: 'Andrew', message: 'Hi, i`m very good!', likesCount: 1, src: Andrew },
         { id: 2, name: 'Diana', message: 'Hi, how are you? I registered for the first time in this social network and I am looking for friends, and I would be very happy if it was you', likesCount: 12, src: Diana },
         { id: 3, name: 'Andrew', message: 'It`s my first post!', likesCount: 20, src: Andrew },
     ],
-    status: ''
+    status: '',
+    updateStatus: null
 };
 
 let ADD_POST = 'ADD-POST';
@@ -71,8 +72,8 @@ export const getUserStatus = (userId) => (dispatch) => {
 
 export const updateUserStatus = (status) => (dispatch) => {
     profileAPI.updateUserStatus(status)
-        .then(response => {
-            dispatch(setNewStatus(response.status))
+        .then(response => { // ? приходит статус 200
+                // dispatch(setNewStatus(status))
         })
         .catch(error => {
             console.error("Ошибка загрузки данных:", error);

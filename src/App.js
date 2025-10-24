@@ -10,29 +10,49 @@ import UsersContainer from './components/users/UsersContainer'
 import Settings from './components/settings/Settings';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Component } from 'react'
+import { connect } from 'react-redux'
+import { inicializedApp } from './redux/reducers/appReducer'
+import Preloader from './common/Preloader/Preloader';
 
 
-function App(props) {
-  return (
-    <BrowserRouter>
-      <div className='app-wrapper'>
-        <HeaderContainer />
-        <Navbar state={props.state.navbar} />
-        <Routes>
-          <Route path="/profile/:userId?" element={<ProfileContainer />} />
-          <Route path="/login" element={<Login />} />  
-          <Route path="/news" element={<News />} />
-          <Route path="/messages/*" element={<MessagesContainer />} />
-          <Route path='/music/' element={<Music />} />
-          <Route path='/users/' element={<UsersContainer />} />
-          <Route path='/settings/' element={<Settings />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
-  )
+class App extends Component {
+
+  componentDidMount() {
+    this.props.inicializedApp()
+  }
+
+  render() {
+    if (!this.props.inicialized) {
+      return < Preloader />
+    } return (
+      <BrowserRouter>
+        <div className='app-wrapper'>
+          <HeaderContainer />
+          <Navbar state={this.props.state.navbar} />
+          <Routes>
+            <Route path="/profile/:userId?" element={<ProfileContainer />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/messages/*" element={<MessagesContainer />} />
+            <Route path='/music/' element={<Music />} />
+            <Route path='/users/' element={<UsersContainer />} />
+            <Route path='/settings/' element={<Settings />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    )
+  }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    state: state,
+    inicialized: state.app.inicialized
+  }
+}
+
+export default connect(mapStateToProps, { inicializedApp })(App)
 
 
 /* <Routes>

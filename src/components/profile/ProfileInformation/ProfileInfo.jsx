@@ -1,7 +1,7 @@
 import css from './ProfileInfo.module.css';
 import userBaseAvatar from '../../../redux/images/profile/Avatar.png'
 import userBaseBackground from '../../../redux/images/profile/UserBackground.jpg'
-import ProfileStatus from './ProfileStatus'
+import ProfileStatusWithHooks from './ProfileStatusWithHooks'
 
 
 function ProfileInfo(props) {
@@ -23,8 +23,8 @@ function ProfileInfo(props) {
                                     .filter(contact => contact && typeof contact === 'string' && contact.trim().length > 0)
                                     .join(', ')}` : null}
                         </div>
-                        <ProfileStatus status={props.status} 
-                        registeredUserId={props.registeredUserId} 
+                        <ProfileStatusWithHooks status={props.status} 
+                        authorizedUserId={props.authorizedUserId} 
                         currentUserId={props.userProfile.userId}
                         updateUserStatus={props.updateUserStatus}
                         />

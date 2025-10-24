@@ -8,7 +8,7 @@ class ProfileStatus extends Component {
     }
 
     activateEditMode = () => {
-        this.props.registeredUserId === this.props.currentUserId ?
+        this.props.authorizedUserId === this.props.currentUserId ?
             this.setState({
                 editMode: true
             }) : this.setState({

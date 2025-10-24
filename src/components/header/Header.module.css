@@ -17,12 +17,16 @@
     left: 8px;
 }
 
-.LoginBlock {
-    float: right;
-
+.LoginInfoBlock {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3px;
+    margin-right: 5px;
+    margin-top: -20px;
 }
 
-.LoginBlock img {
+.LoginInfoBlock img {
     float: left;
     width: 45px;
     margin-right: 10px;
@@ -36,9 +40,8 @@
 }
 
 .LoginLink {
-    position: relative;
-    top: -15px;
-    left: -5px;
+    float: right;
+    margin-top: -30px;
 }
 
 .SocialNetworkName {

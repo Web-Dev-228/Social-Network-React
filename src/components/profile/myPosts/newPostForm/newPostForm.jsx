@@ -1,10 +1,11 @@
 import { Field, reduxForm } from 'redux-form'
 import css from './newPostForm.module.css'
 import { required, maxLengthCreator, minLengthCreator } from '../../../../Utilites/validators/Validates'
-import { Textarea } from '../../../../common/FormsControls/FormsConrols'
+import { FormControl } from '../../../../common/FormsControls/FormsConrols'
 
 const maxLength20 = maxLengthCreator(20);
 const minLength1 = minLengthCreator(1);
+const Textarea = FormControl('textarea')
 
 function newPostForm(props) {
     return (

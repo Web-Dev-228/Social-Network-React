@@ -1,13 +1,20 @@
 import css from './Login.module.css'
 import LoginReduxForm from './LoginForm'
+import { login } from '../../redux/reducers/authReducer'
+import { connect } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 
 
-function Login(props) {
+const Login = (props) => {
+    console.log('isAuth:', props.isAuth);
     const onSubmit = (formData) => {
-        console.log(formData)
+        let { email, password, rememberMe } = formData;
+        props.login(email, password, rememberMe)
     }
 
-    return (
+    if (props.isAuth) {
+        return <Navigate to={'/profile'} />
+    } return (
         <div>
             <div className={css.Auth}>
                 <h1>Login to Letter</h1>
@@ -17,4 +24,8 @@ function Login(props) {
     )
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+})
+
+export default connect(mapStateToProps, { login })(Login);

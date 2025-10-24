@@ -1,6 +1,14 @@
+.FormContainer {
+  display: flex;
+  align-items: center;
+}
+
 .Message {
-  width: 93%;
+  flex: 1;
+  width:383%;
+  margin-top: 5px;
   min-height: 50px;
+  max-width: 935px;
   resize: vertical;
   font-size: 1.25em;
   font-style: italic;
@@ -15,18 +23,12 @@
   outline: none;
 }
 
-input:focus {
-  border-color: #007bff;
-}
-
-input:hover {
-  border-color: #0056b3;
-}
-
 .AddMessage {
-  position: absolute;
+  flex: 2;
+  position: flex;
+  margin-left: auto;
+  max-width: 5.3%;
   min-height: 56px;
-  width: 3.25%;
   background-color: rgb(47, 46, 46);
   border-radius: 11px;
 }

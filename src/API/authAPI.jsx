@@ -18,5 +18,11 @@ export const authAPI = {
     },
     getUserInfo(id) {
         return instance.get(`profile/` + id)
+    },
+    login(email, password, rememberMe = false) {
+        return instance.post(`/auth/login`, { email, password, rememberMe })
+    },
+    logOut() {
+        return instance.delete(`/auth/login`)
     }
 }
