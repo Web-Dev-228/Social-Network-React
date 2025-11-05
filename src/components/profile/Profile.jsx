@@ -14,7 +14,7 @@ function Profile(props) {
                 userInfo={props.userInfo}
                 status={props.status}
                 authorizedUserId={props.authorizedUserId}
-                updateUserStatus={props.updateUserStatus} />
+                updateUserStatusThunk={props.updateUserStatusThunk} />
             <MyPostsContainer />
         </div>
     )

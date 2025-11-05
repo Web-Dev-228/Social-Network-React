@@ -14,7 +14,12 @@ function ProfileInfo(props) {
                         <div>
                             Name: {props.userProfile.fullName || 'Name'}
                         </div>
-                        <div> {props.userProfile.aboutMe === null ? null : `Status: ${props.userProfile.aboutMe}`}</div>
+                        <ProfileStatusWithHooks status={props.status}
+                            authorizedUserId={props.authorizedUserId}
+                            currentUserId={props.userProfile.userId}
+                            updateUserStatusThunk={props.updateUserStatusThunk}
+                        />
+                        <div> {props.userProfile.aboutMe === null ? null : `About me: ${props.userProfile.aboutMe}`}</div>
                         {props.userProfile.lookingForAJob === true ? `Looking for a job: ${props.userProfile.lookingForAJobDescription}` : null}
                         <div className={css.Contacts}>
                             {props.userProfile?.contacts === null ? null : Object.values(props.userProfile.contacts)
@@ -23,11 +28,6 @@ function ProfileInfo(props) {
                                     .filter(contact => contact && typeof contact === 'string' && contact.trim().length > 0)
                                     .join(', ')}` : null}
                         </div>
-                        <ProfileStatusWithHooks status={props.status} 
-                        authorizedUserId={props.authorizedUserId} 
-                        currentUserId={props.userProfile.userId}
-                        updateUserStatus={props.updateUserStatus}
-                        />
                     </div>
                 </div>
             </div>

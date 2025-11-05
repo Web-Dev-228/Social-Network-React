@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import Users from './Users'
 import Preloader from '../../common/Preloader/Preloader'
-import { follow, unfollow, getUsersAC } from '../../redux/reducers/usersReducer'
+import { followUnfollowThunk, getUsersThunk } from '../../redux/reducers/usersReducer'
 import {
     getUsersSelector, getTotalUsersCount, getPageSize,
     getCurrentPage, getIsFetching, getFollowingInProgress
@@ -11,11 +11,11 @@ import {
 
 class UsersContainer extends Component {
     componentDidMount() {
-        this.props.getUsersAC(this.props.currentPage, this.props.pageSize)
+        this.props.getUsersThunk(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.getUsersAC(pageNumber, this.props.pageSize)
+        this.props.getUsersThunk(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -26,24 +26,12 @@ class UsersContainer extends Component {
                     totalUsersCount={this.props.totalUsersCount}
                     currentPage={this.props.currentPage}
                     onPageChanged={this.onPageChanged}
-                    follow={this.props.follow}
-                    unfollow={this.props.unfollow}
+                    followUnfollowThunk={this.props.followUnfollowThunk}
                     followingInProgress={this.props.followingInProgress}
                 />}
         </>
     }
 }
-
-// function mapStateToProps(state) {
-//     return {
-//         users: state.usersPage.users,
-//         totalUsersCount: state.usersPage.totalUsersCount,
-//         pageSize: state.usersPage.pageSize,
-//         currentPage: state.usersPage.currentPage,
-//         isFetching: state.usersPage.isFetching,
-//         followingInProgress: state.usersPage.followingInProgress
-//     }
-// }
 
 function mapStateToProps(state) {
     return {
@@ -57,5 +45,5 @@ function mapStateToProps(state) {
 }
 
 export default compose(
-    connect(mapStateToProps, { follow, unfollow, getUsersAC })
+    connect(mapStateToProps, { followUnfollowThunk, getUsersThunk })
 )(UsersContainer) 

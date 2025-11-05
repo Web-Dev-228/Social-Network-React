@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import withRouterProfile from '../../hoc/withRouterProfile'
 import withNavigateToLogin from '../../hoc/withNavigateToLogin'
-import { getUserProfile, getUserStatus, updateUserStatus } from '../../redux/reducers/profileReducer'
+import { getUserProfileThunk, getUserStatusThunk, updateUserStatusThunk } from '../../redux/reducers/profileReducer'
 
 
 class ProfileContainer extends Component {
@@ -16,8 +16,8 @@ class ProfileContainer extends Component {
                 this.props.navigateToLogin.navigate('/login');
             }
         }
-        this.props.getUserProfile(userId)
-        this.props.getUserStatus(userId)
+        this.props.getUserProfileThunk(userId)
+        this.props.getUserStatusThunk(userId)
     }
 
     render() {
@@ -41,5 +41,5 @@ function mapStateToProps(state) {
 
 export default compose(
     withRouterProfile, withNavigateToLogin,
-    connect(mapStateToProps, { getUserProfile, getUserStatus, updateUserStatus })
+    connect(mapStateToProps, { getUserProfileThunk, getUserStatusThunk, updateUserStatusThunk })
 )(ProfileContainer);

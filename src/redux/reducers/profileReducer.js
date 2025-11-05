@@ -12,14 +12,12 @@ let initialState = {
         { id: 2, name: 'Diana', message: 'Hi, how are you? I registered for the first time in this social network and I am looking for friends, and I would be very happy if it was you', likesCount: 12, src: Diana },
         { id: 3, name: 'Andrew', message: 'It`s my first post!', likesCount: 20, src: Andrew },
     ],
-    status: '',
-    updateStatus: null
+    status: ''
 };
 
 let ADD_POST = 'ADD-POST';
 let SET_USER_PROFILE = 'SET_USER_PROFILE'
 let SET_USER_STATUS = 'SET_USER_STATUS'
-let SET_NEW_STATUS = 'SET_NEW_STATUS'
 
 
 function profileReducer(state = initialState, action) {
@@ -40,8 +38,6 @@ function profileReducer(state = initialState, action) {
             return { ...state, userProfile: action.userProfile }
         case SET_USER_STATUS:
             return { ...state, status: action.status }
-        case SET_NEW_STATUS:
-            return { ...state, status: action.status }
         default: return state;
     }
 }
@@ -49,35 +45,21 @@ function profileReducer(state = initialState, action) {
 export const addPost = (newPostText) => ({ type: ADD_POST, newPostText });
 export const setUserProfile = (userProfile) => ({ type: SET_USER_PROFILE, userProfile });
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status })
-export const setNewStatus = (status) => ({ type: SET_NEW_STATUS, status })
 
-export const getUserProfile = (userId) => (dispatch) => {
-    profileAPI.getUserProfile(userId)
-        .then(response => {
-            dispatch(setUserProfile(response.data))
-        })
-        .catch(error => {
-            console.error("Ошибка загрузки данных:", error);
-        });
-};
-export const getUserStatus = (userId) => (dispatch) => {
-    profileAPI.getUserStatus(userId)
-        .then(response => {
-            dispatch(setUserStatus(response.data))
-        })
-        .catch(error => {
-            console.error("Ошибка загрузки данных:", error);
-        });
+
+// Thunk
+export const getUserProfileThunk = (userId) => async (dispatch) => {
+    let response = await profileAPI.getUserProfile(userId)
+    dispatch(setUserProfile(response.data))
 };
 
-export const updateUserStatus = (status) => (dispatch) => {
-    profileAPI.updateUserStatus(status)
-        .then(response => { // ? приходит статус 200
-                // dispatch(setNewStatus(status))
-        })
-        .catch(error => {
-            console.error("Ошибка загрузки данных:", error);
-        });
+export const getUserStatusThunk = (userId) => async (dispatch) => {
+    let response = await profileAPI.getUserStatus(userId)
+    dispatch(setUserStatus(response.data))
+};
+
+export const updateUserStatusThunk = (status) => async (dispatch) => {
+    await profileAPI.updateUserStatus(status)
 }
 
 

@@ -9,8 +9,7 @@ let initialState = {
     followingInProgress: []
 }
 
-let FOLLOW = 'FOLLOW';
-let UNFOLLOW = 'UNFOLLOW';
+let FOLLOW_UNFOLLOW = 'FOLLOW_UNFOLLOW';
 let SET_USERS = 'SET_USERS';
 let SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 let SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
@@ -19,22 +18,12 @@ let TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS';
 
 function usersReducer(state = initialState, action) {
     switch (action.type) {
-        case FOLLOW:
+        case FOLLOW_UNFOLLOW:
             return {
                 ...state,
                 users: state.users.map(users => {
                     if (users.id === action.userID) {
-                        return { ...users, followed: true }
-                    }
-                    return users
-                })
-            }
-        case UNFOLLOW:
-            return {
-                ...state,
-                users: state.users.map(users => {
-                    if (users.id === action.userID) {
-                        return { ...users, followed: false }
+                        return { ...users, followed: action.value }
                     }
                     return users
                 })
@@ -58,8 +47,7 @@ function usersReducer(state = initialState, action) {
     }
 }
 
-export const followSuccess = (userID) => ({ type: FOLLOW, userID })
-export const unfollowSuccess = (userID) => ({ type: UNFOLLOW, userID })
+export const followUnfollow = (userID, value) => ({ type: FOLLOW_UNFOLLOW, userID, value })
 export const setUsers = (users) => ({ type: SET_USERS, users })
 export const setCurrentPage = (pageNumber) => ({ type: SET_CURRENT_PAGE, pageNumber })
 export const setTotalUsersCount = (totalCount) => ({ type: SET_TOTAL_USERS_COUNT, totalCount })
@@ -67,54 +55,26 @@ export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isF
 export const toggleFollowingProgress = (followingProgress, userId) => ({ type: TOGGLE_FOLLOWING_PROGRESS, followingProgress, userId })
 
 
-// Thunk Creators
-export const getUsersAC = (pageNumber, currentPage, pageSize) => {
-    return (dispatch) => {
-        dispatch(toggleIsFetching(true))
-        usersAPI.getUsers(pageNumber, currentPage, pageSize)
-            .then(data => {
-                dispatch(setCurrentPage(pageNumber))
-                dispatch(toggleIsFetching(false))
-                dispatch(setUsers(data.items))
-                dispatch(setTotalUsersCount(data.totalCount))   
-            })
-            .catch(error => {
-                dispatch(toggleIsFetching(false))
-                console.error("Ошибка загрузки данных:", error);
-            })
-    }
+// Thunk
+export const getUsersThunk = (pageNumber, currentPage, pageSize) => async (dispatch) => {
+    dispatch(toggleIsFetching(true))
+    let data = await usersAPI.getUsers(pageNumber, currentPage, pageSize)
+    dispatch(setCurrentPage(pageNumber))
+    dispatch(toggleIsFetching(false))
+    dispatch(setUsers(data.items))
+    dispatch(setTotalUsersCount(data.totalCount))
 }
 
-export const follow = (userId) => {
-    return (dispatch) => {
-        dispatch(toggleFollowingProgress(true, userId))
-        usersAPI.follow(userId)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(followSuccess(userId))
-                }
-                dispatch(toggleFollowingProgress(false, userId))
-            })
-    }
-}
-
-export const unfollow = (userId) => (dispatch) => {
+export const followUnfollowThunk = (userId, value) => async (dispatch) => {
     dispatch(toggleFollowingProgress(true, userId))
-    usersAPI.unfollow(userId)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(unfollowSuccess(userId))
-            }
-            dispatch(toggleFollowingProgress(false, userId))
-        })
+    const response = await (value === true
+        ? usersAPI.follow(userId)
+        : usersAPI.unfollow(userId));
+    if (response.data.resultCode === 0) {
+        dispatch(followUnfollow(userId, value))
+    }
+    dispatch(toggleFollowingProgress(false, userId))
 }
-
-/// ????
-// function update() {
-//     console.log("Обновление данных или интерфейса");
-
-//     setTimeout(update, 5000);
-// }
 
 
 export default usersReducer;

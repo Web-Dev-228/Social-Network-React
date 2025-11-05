@@ -16,8 +16,8 @@ function Header(props) {
                             <img src={props.userPhoto || userBaseAvatar} alt='userPhoto' />
                         </div>
                         <div>{props.userName || 'name'}</div>
-                        <div className={css.LogOut}>
-                            <button onClick={props.logOut}>Log out</button>
+                        <div className={css.LogOutThunk}>
+                            <button onClick={props.logOutThunk}>Log out</button>
                         </div>
                     </div> :
                     <NavLink to={'/login'} className={css.LoginLink}>Login</NavLink>}

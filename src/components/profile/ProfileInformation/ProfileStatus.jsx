@@ -20,7 +20,7 @@ class ProfileStatus extends Component {
         this.setState({
             editMode: false
         })
-        this.props.updateUserStatus(this.state.status)
+        this.props.updateUserStatusThunk(this.state.status)
     }
 
     onStatusChange = (e) => {

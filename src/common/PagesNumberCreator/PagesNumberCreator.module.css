@@ -1,0 +1,15 @@
+.pagesNumber {
+    position: relative;
+    width: 600px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.active {
+    font-weight: bold;
+}
+
+.notActive {
+    cursor: pointer;
+}

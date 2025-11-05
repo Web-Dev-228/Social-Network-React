@@ -3,10 +3,11 @@ import Post from './post/Post';
 import NewPostReduxForm from './newPostForm/newPostForm'
 
 
-function MyPosts(props) {
+const MyPosts = (props) => {
 
     function addPost(formData) {
         props.addPost(formData.newPostText);
+
     }
 
     return (

@@ -1,4 +1,4 @@
-import { getAuthAndUserInfo } from './authReducer'
+import { getAuthAndUserInfoThunk } from './authReducer'
 
 let initialState = {
     inicialized: false
@@ -20,8 +20,10 @@ function appReducer(state = initialState, action) {
 
 export const inicializedSuccess = () => ({ type: INICIALIZED_SUCCESS });
 
+
+// Thunk
 export const inicializedApp = () => (dispatch) => {
-    let promise = dispatch(getAuthAndUserInfo())
+    let promise = dispatch(getAuthAndUserInfoThunk())
     promise.then(() => {
         dispatch(inicializedSuccess())
     })

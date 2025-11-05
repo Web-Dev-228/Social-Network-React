@@ -2,20 +2,14 @@ import css from './Users.module.css'
 import writeMessage from '../../redux/images/friends/writeMessage.png'
 import { NavLink } from 'react-router-dom';
 import Avatar from '../../redux/images/profile/Avatar.png';
+import PagesNumberCreator from '../../common/PagesNumberCreator/PagesNumberCreator'
 
 function Users(props) {
-
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
-
     return (
         <div className={css.Users} >
             <div>
                 {props.users.map(user =>
-                    <div className={css.UserItems}>
+                    <div key={user.id} className={css.UserItems}>
                         <div className={css.UserAvatar}>
                             <NavLink to={`../Profile/` + user.id}>
                                 <img src={user.photos.small != null ? user.photos.small : Avatar} alt='UserAvatar' />
@@ -23,10 +17,10 @@ function Users(props) {
                             <div>
                                 {user.followed
                                     ? <button disabled={props.followingInProgress?.some(id => id === user.id)} onClick={() => {
-                                        props.unfollow(user.id)
+                                        props.followUnfollowThunk(user.id, false)
                                     }} className={css.followed}>Follow</button>
                                     : <button disabled={props.followingInProgress?.some(id => id === user.id)} onClick={() => {
-                                        props.follow(user.id)
+                                        props.followUnfollowThunk(user.id, true)
                                     }} className={css.followed}>Unfollow</button>}
                             </div>
                         </div>
@@ -50,11 +44,9 @@ function Users(props) {
                     </div>
                 )}
             </div>
-            <div className={css.pagesNumber}>
-                {pages.map(pages => {
-                    return <span className={props.currentPage === pages ? css.active : css.notActive} onClick={(e) => { props.onPageChanged(pages) }}> {pages}</span>
-                })}
-            </div>
+            <PagesNumberCreator
+                totalUsersCount={props.totalUsersCount} pageSize={props.pageSize}
+                currentPage={props.currentPage} onPageChanged={props.onPageChanged} />
         </div>
     )
 }

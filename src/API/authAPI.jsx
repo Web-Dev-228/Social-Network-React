@@ -12,9 +12,6 @@ const instance = axios.create({
 export const authAPI = {
     getAuthUserData() {
         return instance.get(`auth/me`)
-            .then(response => {
-                return response.data
-            })
     },
     getUserInfo(id) {
         return instance.get(`profile/` + id)
