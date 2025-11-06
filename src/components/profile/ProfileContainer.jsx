@@ -16,7 +16,7 @@ class ProfileContainer extends Component {
                 this.props.navigateToLogin.navigate('/login');
             }
         }
-        this.props.getUserProfileThunk(userId)
+        this.props.getUserProfileThunk(userId, this.props.navigateToLogin.navigate)
         this.props.getUserStatusThunk(userId)
     }
 

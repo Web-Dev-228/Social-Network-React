@@ -2,6 +2,7 @@
   "name": "react-project-1",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://web-dev-228.github.io/Social-Network-React-Deploy",
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
     "@testing-library/dom": "^10.4.0",
@@ -27,7 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +52,8 @@
   },
   "devDependencies": {
     "@testing-library/react": "^16.3.0",
-    "jest": "^30.2.0"
+    "gh": "^2.8.9",
+    "jest": "^30.2.0",
+    "pages": "^0.0.16"
   }
 }

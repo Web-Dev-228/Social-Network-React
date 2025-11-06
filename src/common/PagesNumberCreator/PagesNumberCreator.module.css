@@ -8,8 +8,10 @@
 
 .active {
     font-weight: bold;
+    padding: 1px;
 }
 
 .notActive {
     cursor: pointer;
+    padding: 1px;
 }

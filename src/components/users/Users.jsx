@@ -45,8 +45,8 @@ function Users(props) {
                 )}
             </div>
             <PagesNumberCreator
-                totalUsersCount={props.totalUsersCount} pageSize={props.pageSize}
-                currentPage={props.currentPage} onPageChanged={props.onPageChanged} />
+                totalItemsCount={props.totalUsersCount} pageSize={props.pageSize}
+                currentPage={props.currentPage} onPageChanged={props.onPageChanged} portionSize={10} />
         </div>
     )
 }

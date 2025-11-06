@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 
-let withNavigateToLogin = (ProfileContainer) => {
+let withNavigateToLogin = (Componenta) => {
     return (props) => {
         const navigateToLogin = { navigate: useNavigate() };
-        return <ProfileContainer {...props} navigateToLogin={navigateToLogin} />
+        return <Componenta {...props} navigateToLogin={navigateToLogin} />
     }
 }
 

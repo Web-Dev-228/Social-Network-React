@@ -1,19 +1,21 @@
 import './App.css';
+import React from 'react'
 import HeaderContainer from './components/header/HeaderContainer';
 import Navbar from './components/navbar/Navbar';
-import ProfileContainer from './components/profile/ProfileContainer';
-import Login from './components/login/Login';
-import MessagesContainer from './components/messages/MessagesContainer';
 import News from './components/news/News';
 import Music from './components/music/Music';
-import UsersContainer from './components/users/UsersContainer'
 import Settings from './components/settings/Settings';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Component } from 'react'
+import { Component, Suspense } from 'react'
 import { connect } from 'react-redux'
 import { inicializedApp } from './redux/reducers/appReducer'
 import Preloader from './common/Preloader/Preloader';
+
+const Login = React.lazy(() => import('./components/login/Login'));
+const ProfileContainer = React.lazy(() => import('./components/profile/ProfileContainer'));
+const MessagesContainer = React.lazy(() => import('./components/messages/MessagesContainer'));
+const UsersContainer = React.lazy(() => import('./components/users/UsersContainer'));
 
 
 class App extends Component {
@@ -31,10 +33,19 @@ class App extends Component {
           <HeaderContainer />
           <Navbar state={this.props.state.navbar} />
           <Routes>
-            <Route path="/profile/:userId?" element={<ProfileContainer />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/profile/:userId?" element={
+              <Suspense fallback="loading...">
+                <ProfileContainer />
+              </Suspense>} />
+            <Route path="/login" element={
+              <Suspense fallback="loading...">
+                <Login />
+              </Suspense>} />
             <Route path="/news" element={<News />} />
-            <Route path="/messages/*" element={<MessagesContainer />} />
+            <Route path="/messages/*" element={
+              <Suspense fallback="loading...">
+                <MessagesContainer />
+              </Suspense>} />
             <Route path='/music/' element={<Music />} />
             <Route path='/users/' element={<UsersContainer />} />
             <Route path='/settings/' element={<Settings />} />

@@ -4,6 +4,7 @@ import Diana from '../images/dialogs/Diana.jpg';
 import Avatar from '../images/profile/avaAndrew.jpg';
 import Background from '../images/profile/UserBackground.jpg';
 
+
 let initialState = {
     userProfile: null,
     userInfo: { id: 1, name: 'Andrew', description: '+ description', userAvatar: Avatar, userBackground: Background },
@@ -48,14 +49,23 @@ export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status })
 
 
 // Thunk
-export const getUserProfileThunk = (userId) => async (dispatch) => {
-    let response = await profileAPI.getUserProfile(userId)
-    dispatch(setUserProfile(response.data))
+export const getUserProfileThunk = (userId, navigate) => async (dispatch) => {
+    const response = await profileAPI.getUserProfile(userId)
+    if (response === null) {
+        dispatch(setUserProfile(response))
+        navigate('/login')
+    } else {
+        dispatch(setUserProfile(response.data))
+    }
 };
 
 export const getUserStatusThunk = (userId) => async (dispatch) => {
     let response = await profileAPI.getUserStatus(userId)
-    dispatch(setUserStatus(response.data))
+    if (response === null) {
+        dispatch(setUserStatus(response))
+    } else {
+        dispatch(setUserStatus(response.data))
+    }
 };
 
 export const updateUserStatusThunk = (status) => async (dispatch) => {
