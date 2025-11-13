@@ -26,5 +26,14 @@ export const profileAPI = {
     },
     updateUserStatus(status) {
         return instance.put(`profile/status`, { status: status })
+    },
+    updateUserPhoto(userPhoto) {
+        const formData = new FormData()
+        formData.append("image", userPhoto)
+        if (!userPhoto) {
+            return userPhoto
+        } else {
+            return instance.put(`profile/photo`, formData)
+        }
     }
 }

@@ -4,11 +4,12 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import withRouterProfile from '../../hoc/withRouterProfile'
 import withNavigateToLogin from '../../hoc/withNavigateToLogin'
-import { getUserProfileThunk, getUserStatusThunk, updateUserStatusThunk } from '../../redux/reducers/profileReducer'
+import { getUserProfileThunk, getUserStatusThunk, updateUserStatusThunk, updateUserPhotoThunk } from '../../redux/reducers/profileReducer'
 
 
 class ProfileContainer extends Component {
-    componentDidMount() {
+
+    getProfile() {
         let userId = this.props.match.params.userId;
         if (!userId) {
             userId = this.props.authorizedUserId;
@@ -17,10 +18,21 @@ class ProfileContainer extends Component {
             }
         }
         this.props.getUserProfileThunk(userId, this.props.navigateToLogin.navigate)
-        this.props.getUserStatusThunk(userId)
+        this.props.getUserStatusThunk(userId, this.props.navigateToLogin.navigate)
+    }
+
+    componentDidMount() {
+        this.getProfile()
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId ) {
+            this.getProfile()
+        }
     }
 
     render() {
+        debugger
         return (
             <Profile {...this.props} />
         )
@@ -41,5 +53,5 @@ function mapStateToProps(state) {
 
 export default compose(
     withRouterProfile, withNavigateToLogin,
-    connect(mapStateToProps, { getUserProfileThunk, getUserStatusThunk, updateUserStatusThunk })
+    connect(mapStateToProps, { getUserProfileThunk, getUserStatusThunk, updateUserStatusThunk, updateUserPhotoThunk })
 )(ProfileContainer);
