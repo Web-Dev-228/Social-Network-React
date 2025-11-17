@@ -32,7 +32,6 @@ class ProfileContainer extends Component {
     }
 
     render() {
-        debugger
         return (
             <Profile {...this.props} />
         )

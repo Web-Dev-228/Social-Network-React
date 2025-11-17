@@ -49,7 +49,6 @@ function profileReducer(state = initialState, action) {
         case SET_USER_STATUS:
             return { ...state, status: action.status }
         case UPDATE_USER_PHOTO:
-            debugger
             return { ...state, userProfile: { ...state.userProfile, photos: action.photos } }
         default: return state;
     }
@@ -77,7 +76,6 @@ export const updateUserStatusThunk = (status) => async () => {
 }
 
 export const updateUserPhotoThunk = (userPhoto) => async (dispatch) => {
-    debugger
     const response = await profileAPI.updateUserPhoto(userPhoto)
     if (response.data.resultCode === 0) {
         dispatch(setUserPhoto(response.data.data.photos))
