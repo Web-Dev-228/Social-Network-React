@@ -7,7 +7,6 @@ const MyPosts = (props) => {
 
     function addPost(formData) {
         props.addPost(formData.newPostText);
-
     }
 
     return (

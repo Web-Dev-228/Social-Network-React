@@ -35,5 +35,8 @@ export const profileAPI = {
         } else {
             return instance.put(`profile/photo`, formData)
         }
+    },
+    updateProfileInfo(profile) {
+        return instance.put(`profile/`, profile).then(res => res.data)
     }
 }

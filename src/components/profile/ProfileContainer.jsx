@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import withRouterProfile from '../../hoc/withRouterProfile'
 import withNavigateToLogin from '../../hoc/withNavigateToLogin'
-import { getUserProfileThunk, getUserStatusThunk, updateUserStatusThunk, updateUserPhotoThunk } from '../../redux/reducers/profileReducer'
+import { getUserProfileThunk, getUserStatusThunk, updateUserStatusThunk, updateUserPhotoThunk, updateProfileInfoThunk }
+    from '../../redux/reducers/profileReducer'
 
 
 class ProfileContainer extends Component {
@@ -26,7 +27,7 @@ class ProfileContainer extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.match.params.userId !== prevProps.match.params.userId ) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.getProfile()
         }
     }
@@ -52,5 +53,6 @@ function mapStateToProps(state) {
 
 export default compose(
     withRouterProfile, withNavigateToLogin,
-    connect(mapStateToProps, { getUserProfileThunk, getUserStatusThunk, updateUserStatusThunk, updateUserPhotoThunk })
+    connect(mapStateToProps,
+        { getUserProfileThunk, getUserStatusThunk, updateUserStatusThunk, updateUserPhotoThunk, updateProfileInfoThunk })
 )(ProfileContainer);

@@ -24,14 +24,6 @@
     flex: 1;
 }
 
-.Contacts {
-    display: block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 800px;
-}
-
 .profilePhoto {
     display: flex;
     flex-direction: column;

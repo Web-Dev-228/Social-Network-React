@@ -7,7 +7,7 @@ function Profile(props) {
     if (!props.userProfile) {
         return <Preloader />
     }
-    
+
     return (
         <div>
             <ProfileInfo userProfile={props.userProfile}
@@ -15,7 +15,8 @@ function Profile(props) {
                 status={props.status}
                 authorizedUserId={props.authorizedUserId}
                 updateUserStatusThunk={props.updateUserStatusThunk}
-                updateUserPhotoThunk={props.updateUserPhotoThunk} />
+                updateUserPhotoThunk={props.updateUserPhotoThunk}
+                updateProfileInfoThunk={props.updateProfileInfoThunk} />
             <MyPostsContainer />
         </div>
     )

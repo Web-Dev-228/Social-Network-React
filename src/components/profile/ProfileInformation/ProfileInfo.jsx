@@ -2,7 +2,7 @@ import css from './ProfileInfo.module.css';
 import userBaseAvatar from '../../../redux/images/profile/Avatar.png'
 import userBaseBackground from '../../../redux/images/profile/UserBackground.jpg'
 import ProfileStatusWithHooks from './ProfileStatusWithHooks'
-import { ProfileInfoWithoutStatus } from './ProfileInfoForms/ProfileInfoForms'
+import ProfileInfoWithoutStatus from './ProfileInfoForms/ProfileInfoData'
 
 function ProfileInfo(props) {
 
@@ -29,7 +29,7 @@ function ProfileInfo(props) {
                             updateUserStatusThunk={props.updateUserStatusThunk}
                         />
                         <ProfileInfoWithoutStatus userProfile={props.userProfile} authorizedUserId={props.authorizedUserId}
-                            currentUserId={props.userProfile.userId} />
+                            currentUserId={props.userProfile.userId} updateProfileInfoThunk={props.updateProfileInfoThunk} />
                     </div>
                 </div>
             </div>

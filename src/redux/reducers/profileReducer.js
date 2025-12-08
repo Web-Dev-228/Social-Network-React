@@ -28,6 +28,7 @@ let ADD_POST = 'ADD-POST';
 let SET_USER_PROFILE = 'SET_USER_PROFILE'
 let SET_USER_STATUS = 'SET_USER_STATUS'
 let UPDATE_USER_PHOTO = 'UPDATE_USER_PHOTO'
+let UPDATE_USER_INFO = 'UPDATE_USER_INFO'
 
 
 function profileReducer(state = initialState, action) {
@@ -50,6 +51,8 @@ function profileReducer(state = initialState, action) {
             return { ...state, status: action.status }
         case UPDATE_USER_PHOTO:
             return { ...state, userProfile: { ...state.userProfile, photos: action.photos } }
+        case UPDATE_USER_INFO:
+            return { ...state, userProfile: action.userProfile }
         default: return state;
     }
 }
@@ -58,6 +61,7 @@ export const addPost = (newPostText) => ({ type: ADD_POST, newPostText });
 export const setUserProfile = (userProfile) => ({ type: SET_USER_PROFILE, userProfile });
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status })
 export const setUserPhoto = (photos) => ({ type: UPDATE_USER_PHOTO, photos })
+export const setProfileInfo = (userProfile) => ({ type: UPDATE_USER_INFO, userProfile })
 
 
 // Thunk
@@ -79,6 +83,16 @@ export const updateUserPhotoThunk = (userPhoto) => async (dispatch) => {
     const response = await profileAPI.updateUserPhoto(userPhoto)
     if (response.data.resultCode === 0) {
         dispatch(setUserPhoto(response.data.data.photos))
+    }
+}
+
+export const updateProfileInfoThunk = (profile) => async (dispatch, getState) => {
+    debugger
+    const userId = getState().auth.id
+    const data = await profileAPI.updateProfileInfo(profile, userId)
+    console.log(data, userId)
+    if (data.resultCode === 0) {
+        dispatch(getUserProfileThunk(userId))
     }
 }
 

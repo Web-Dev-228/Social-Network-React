@@ -11,15 +11,15 @@ function LoginForm(props) {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder='Enter your login:' name='email' component={Input}
+                <Field name='email' placeholder='Enter your login:' component={Input}
                     validate={[required, maxLength30, minLength1]} />
             </div>
             <div>
-                <Field type='password' placeholder='Enter your password:' name='password' component={Input}
+                <Field name='password' type='password' placeholder='Enter your password:' component={Input}
                     validate={[required, maxLength30, minLength1]} />
             </div>
             <div>
-                <Field type='checkbox' name='rememberMe' component='input'
+                <Field name='rememberMe' type='checkbox' component='input'
                     validate={[required]} /> remember me
             </div>
             <div className={css.IncorrectEmailOrPassword}>
@@ -31,6 +31,7 @@ function LoginForm(props) {
         </form>
     )
 }
+
 
 const LoginReduxForm = reduxForm({ form: 'loginForm' })(LoginForm)
 
