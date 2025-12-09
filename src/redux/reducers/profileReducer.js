@@ -1,4 +1,5 @@
 import { profileAPI } from '../../API/profileAPI'
+import { stopSubmit } from 'redux-form'
 import ifResponseCanBeUndefined from '../../hoc/ifResponseCanBeUndefined'
 import Andrew from '../images/dialogs/Andrew.jpg';
 import Diana from '../images/dialogs/Diana.jpg';
@@ -87,12 +88,22 @@ export const updateUserPhotoThunk = (userPhoto) => async (dispatch) => {
 }
 
 export const updateProfileInfoThunk = (profile) => async (dispatch, getState) => {
-    debugger
     const userId = getState().auth.id
     const data = await profileAPI.updateProfileInfo(profile, userId)
     console.log(data, userId)
     if (data.resultCode === 0) {
         dispatch(getUserProfileThunk(userId))
+    } else {
+        let nameOfContacts = []
+        for (let i = 0; i < data.messages.length; i++) {
+            const text = data.messages[i];
+            const parts = text.split(/\W+/);
+            const nameOfContact = parts[parts.length - 2];
+            nameOfContacts.push(nameOfContact)
+        }
+
+        dispatch(stopSubmit('Profile_infoForm', { _error: nameOfContacts.join(', ') }));
+        return Promise.reject(data.messages[0])
     }
 }
 

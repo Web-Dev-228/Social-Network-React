@@ -21,7 +21,7 @@ function Messages(props) {
           />
         )}
       </div>
-      <NewMessageReduxForm onSubmit={addMessage} />
+      <NewMessageReduxForm initialValues={{ newMessageText: props.messages[1].message }} onSubmit={addMessage} />
     </div>
   )
 }

@@ -1,4 +1,3 @@
-import React from 'react'
 import css from './ProfileInfoForms.module.css'
 import { useState } from 'react'
 import ProfileInfoWithoutStatusReduxForm from './ProfileInfoForm'
@@ -13,38 +12,40 @@ const ProfileInfoWithoutStatus = (props) => {
     }
 
     function updateProfileInfo(values) {
-        let fullName = values.fullName ? values.fullName : props.userProfile.fullName
-        let aboutMe = values.aboutMe ? values.aboutMe : props.userProfile.aboutMe
-        let lookingForAJobDescription = values.lookingForAJobDescription ?
-            values.lookingForAJobDescription : props.userProfile.lookingForAJobDescription
-        let lookingForAJob = values.lookingForAJob ?
-            values.lookingForAJob : props.userProfile.lookingForAJob
-        console.log(values)
+        let lookingForAJob = values.lookingForAJob === undefined ?
+            props.userProfile.lookingForAJob : values.lookingForAJob
+
         let formData = {
-            fullName: fullName,
-            aboutMe: aboutMe,
+            fullName: values.fullName || props.userProfile.fullName,
+            aboutMe: values.aboutMe || props.userProfile.aboutMe,
             lookingForAJob: lookingForAJob,
-            lookingForAJobDescription: lookingForAJobDescription,
+            lookingForAJobDescription: values.lookingForAJobDescription || props.userProfile.lookingForAJobDescription,
             contacts: {
-                facebook: values.facebook || null,
-                website: values.website || null,
-                vk: values.vk || null,
-                twitter: values.twitter || null,
-                instagram: values.instagram || null,
-                youtube: values.youtube || null,
-                github: values.github || null,
-                mainLink: values.mainLink || null
+                facebook: values.facebook || props.userProfile.contacts.facebook,
+                website: values.website || props.userProfile.contacts.website,
+                vk: values.vk || props.userProfile.contacts.vk,
+                twitter: values.twitter || props.userProfile.contacts.twitter,
+                instagram: values.instagram || props.userProfile.contacts.instagram,
+                youtube: values.youtube || props.userProfile.contacts.youtube,
+                github: values.github || props.userProfile.contacts.github,
+                mainLink: values.mainLink || props.userProfile.contacts.mainLink
             }
         }
-        setEditMode(false)
-        props.updateProfileInfoThunk(formData);
+        console.log(formData)
+
+        props.updateProfileInfoThunk(formData)
+            .then(() => {
+                setEditMode(false)
+            })
+            .catch(error => {
+                // выловили ошибку из UI сюда
+            });
     }
-    console.log(props.userProfile)
 
     return (
         <div>
             {editMode && props.userProfile ?
-                <ProfileInfoWithoutStatusReduxFormMemo initialValues={props.userProfile}
+                <ProfileInfoWithoutStatusReduxForm initialValues={props.userProfile}
                     userProfile={props.userProfile}
                     authorizedUserId={props.authorizedUserId} currentUserId={props.userProfile.userId}
                     setEditMode={setEditMode} onSubmit={updateProfileInfo} />
@@ -58,7 +59,8 @@ const ProfileInfoWithoutStatus = (props) => {
                         {props.userProfile.lookingForAJob ?
                             `Looking for a job: Yes` : `Looking for a job: No`}
                     </div>
-                    <div>{`My professional skills: ${props.userProfile.lookingForAJobDescription}`}
+                    <div>{props.userProfile.lookingForAJobDescription ?
+                        `My professional skills: ${props.userProfile.lookingForAJobDescription}` : undefined}
                     </div>
                     <div className={css.Contacts}>
                         Contacts {Object
@@ -73,17 +75,5 @@ const ProfileInfoWithoutStatus = (props) => {
         </div>
     )
 }
-
-const ProfileInfoWithoutStatusReduxFormMemo = React.memo(({
-    initialValues,
-    userProfile, authorizedUserId, currentUserId, setEditMode, onSubmit
-}) => {
-    return (
-        <ProfileInfoWithoutStatusReduxForm initialValues={initialValues}
-            userProfile={userProfile}
-            authorizedUserId={authorizedUserId} currentUserId={currentUserId}
-            setEditMode={setEditMode} onSubmit={onSubmit} />
-    )
-})
 
 export default ProfileInfoWithoutStatus;

@@ -10,11 +10,11 @@ import store from './redux/ReduxStore';
 
 let root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
+    //<React.StrictMode>
         <Provider store={store}>
             <App state={store.getState()} />
         </Provider>
-    </React.StrictMode>
+    //</React.StrictMode>
 )
 
 

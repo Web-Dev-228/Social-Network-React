@@ -1,27 +1,31 @@
 import React, { useState } from 'react'
 import { Field, reduxForm } from 'redux-form'
+import { FormControl } from '../../../../common/FormsControls/FormsConrols'
 import css from './ProfileInfoForms.module.css'
 
-const ProfileInfoWithoutStatusForm = (props) => {
-    const [checked, setChecked] = useState(props.userProfile.lookingForAJob);
+
+const Input = FormControl('input')
+
+const ProfileInfoWithoutStatusForm = ({ handleSubmit, userProfile, error }) => {
+    const [checked, setChecked] = useState(userProfile.lookingForAJob);
 
     function handleChange() {
         setChecked(!checked);
     }
-debugger
+
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div key={Field.name} className={css.profileInfoWithoutStatus}>
                 <div>
                     <label>Name: </label>
-                    <Field name='fullName' component='input'
-                    //placeholder={props.userProfile.fullName || 'Name'} 
+                    <Field name='fullName' component={Input}
+                        placeholder={userProfile.fullName || 'Name'}
                     />
                 </div>
                 <div>
                     <label>AboutMe: </label>
-                    <Field name='aboutMe' component='input'
-                    // placeholder={props.userProfile.aboutMe === null ? null : props.userProfile.aboutMe}
+                    <Field name='aboutMe' component={Input}
+                        placeholder={userProfile.aboutMe === null ? null : userProfile.aboutMe}
                     />
                 </div>
                 <div>
@@ -38,26 +42,29 @@ debugger
                     <label>My professional skills: </label>
                     <Field
                         name='lookingForAJobDescription'
-                        component='input'
-                    // placeholder={props.userProfile.lookingForAJobDescription ?
-                    //     props.userProfile.lookingForAJobDescription : null}
+                        component={Input}
+                        placeholder={userProfile.lookingForAJobDescription ?
+                            userProfile.lookingForAJobDescription : null}
                     />
                 </div>
                 <div className={css.Contacts}>
                     Contacts {Object
-                        .keys(props.userProfile.contacts)
+                        .keys(userProfile.contacts)
                         .map(contact => {
                             return (
-                                <div>
+                                <div key={contact}>
                                     <label>{contact}: </label>
                                     <Field
                                         name={contact}
-                                        component='input'
-                                    // placeholder={props.userProfile.contacts[contact] || '...'}
+                                        component={Input}
+                                        placeholder={userProfile.contacts[contact] || '...'}
                                     />
                                 </div>)
                         })}
                 </div>
+            </div>
+            <div className={css.IncorrectEmailOrPassword}>
+                {error ? `Invalid url format: ` + error : undefined}
             </div>
             <button>save</button>
         </form>
