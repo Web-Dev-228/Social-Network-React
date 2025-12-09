@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { FormControl } from '../../../../common/FormsControls/FormsConrols'
 import css from './ProfileInfoForms.module.css'
@@ -7,12 +6,6 @@ import css from './ProfileInfoForms.module.css'
 const Input = FormControl('input')
 
 const ProfileInfoWithoutStatusForm = ({ handleSubmit, userProfile, error }) => {
-    const [checked, setChecked] = useState(userProfile.lookingForAJob);
-
-    function handleChange() {
-        setChecked(!checked);
-    }
-
     return (
         <form onSubmit={handleSubmit}>
             <div key={Field.name} className={css.profileInfoWithoutStatus}>
@@ -34,8 +27,6 @@ const ProfileInfoWithoutStatusForm = ({ handleSubmit, userProfile, error }) => {
                         name='lookingForAJob'
                         component='input'
                         type='checkbox'
-                        checked={checked}
-                        onChange={handleChange}
                     />
                 </div>
                 <div>
